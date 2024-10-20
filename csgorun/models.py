@@ -13,20 +13,47 @@ class User(models.Model):
 	class Meta:
 		pass
 
-	def add_balance(self, additive):
-		if additive <= 0:
-			raise ValueError("Additive must be greater than zero")
+	def add_balance(self, additive: int|float = 0) -> bool:
+		"""
+		Raise value error if additive is negative.\n
+		return True if additive is added else return False.
+
+		:param additive:
+		:return:
+		"""
+		if additive < 0:
+			try:
+				raise ValueError("Additive must be greater than zero")
+			finally:
+				return False
 
 		self.balance += additive
 
-	def subtract_balance(self, subtractive):
-		if subtractive <= 0:
-			raise ValueError("Subtractive must be greater than zero")
+		return True
 
-		if self.balance <= 0:
-			raise ValueError("Balance must be greater than zero")
+	def subtract_balance(self, subtractive: int|float = 0) -> bool:
+		"""
+		Raise value error if subtractive is negative\n
+		Raise value error if balance is negative or equal to zero.\n
+		return True if subtractive is subtracted else return False.
+
+		:param subtractive:
+		:return:
+		"""
+		if subtractive < 0:
+			try:
+				raise ValueError("Subtractive must be greater than zero")
+			finally:
+				return False
+
+		if self.balance < 0:
+			try:
+				raise ValueError("Balance must be greater than zero")
+			finally:
+				return False
 
 		self.balance -= subtractive
+		return True
 
 	def __repr__(self):
 		return f'User {self.name} with balance {self.balance}'
