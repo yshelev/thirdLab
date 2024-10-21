@@ -17,6 +17,17 @@ class User(models.Model):
 	class Meta:
 		pass
 
+	def add_item(self, item_id):
+		try:
+			Skin.objects.get(item_id)
+			self.items.append(item_id)
+		except Skin.DoesNotExist:
+			raise IndexError("Skin does not exist")
+
+		except Exception as e:
+			raise Exception(f"unknown error: {e}")
+
+
 	def add_balance(self, additive: int|float = 0) -> bool:
 		"""
 		Raise value error if additive is negative.\n
