@@ -71,6 +71,29 @@ class Case(models.Model):
 	class Meta:
 		pass
 
+class Gun(models.Model):
+	name = models.CharField(max_length=50, default="ssg08", unique=True)
+
+class Quality(models.Model):
+	BATTLE_SCARED = "BS"
+	WELL_WORN = "WW"
+	FIELD_TESTED = "FT"
+	MINIMAL_WEAR = "MW"
+	FACTORY_NEW = "FN"
+	QUALITY_CHOICES = {
+		BATTLE_SCARED: "battle scared",
+		WELL_WORN: "well_worn",
+		FIELD_TESTED: "field tested",
+		MINIMAL_WEAR: "minimal wear",
+		FACTORY_NEW: "factory new",
+	}
+	name: str = models.CharField(
+		max_length=2,
+		choices=QUALITY_CHOICES,
+		default=BATTLE_SCARED,
+		unique=True
+	)
+
 class Skin(models.Model):
 	quality: Quality = models.ForeignKey(Quality, on_delete=models.CASCADE)
 	gun: Gun = models.ForeignKey(Gun, on_delete=models.CASCADE)
