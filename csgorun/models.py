@@ -2,13 +2,17 @@ from django.db import models
 
 class User(models.Model):
 	"""
-	fields:
-	name, path_to_icon, balance, items
+	fields:\n
+	name, path_to_icon, balance, items\n
+	methods:\n
+	add_balance,
+	substract_balance,
+	add_item
 	"""
-	name = models.CharField(max_length=50)
-	path_to_icon = models.CharField(max_length=500)
-	balance = models.DecimalField(decimal_places=2, max_digits=10)
-	items = models.JSONField(default=list)
+	name: str = models.CharField(max_length=50)
+	path_to_icon: str = models.CharField(max_length=500)
+	balance: int = models.IntegerField()
+	items: list = models.JSONField(default=list) # items_id
 
 	class Meta:
 		pass
@@ -60,16 +64,18 @@ class User(models.Model):
 
 
 class Case(models.Model):
-	name = models.CharField(max_length=50)
-	cost = models.DecimalField(decimal_places=2, max_digits=10)
-	path_to_icon = models.CharField(max_length=500)
-	pull = models.JSONField(default=list)
+	name: str = models.CharField(max_length=50)
+	cost: int = models.IntegerField()
+	path_to_icon: str = models.CharField(max_length=500)
+	pull: list  = models.JSONField(default=list)
 	class Meta:
 		pass
 
 class Skin(models.Model):
-	name = models.CharField(max_length=50)
-	path_to_icon = models.CharField(max_length=500)
-	cost = models.DecimalField(decimal_places=2, max_digits=10)
+	quality: Quality = models.ForeignKey(Quality, on_delete=models.CASCADE)
+	gun: Gun = models.ForeignKey(Gun, on_delete=models.CASCADE)
+	name: str = models.CharField(max_length=50)
+	path_to_icon: str = models.CharField(max_length=500)
+	cost: int = models.IntegerField()
 	class Meta:
 		pass
