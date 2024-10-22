@@ -4,5 +4,6 @@ from csgorun import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('allauth.urls')),
     path('', include('csgorun.urls')),
 ]

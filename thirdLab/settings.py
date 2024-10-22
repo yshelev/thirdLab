@@ -18,8 +18,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'csgorun'
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.openid',
+    'allauth.socialaccount.providers.steam',
+    'csgorun',
 ]
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = "/"
+# AUTH_USER_MODEL = 'csgorun.User'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -29,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'thirdLab.urls'
@@ -49,6 +62,22 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    "steam": {
+        'APP': {
+            'client_id': '1733DB5B51C669A46C98C73EB5381329',
+            'secret': '1733DB5B51C669A46C98C73EB5381329',
+            'key': '',
+
+        }
+    }
+}
 
 WSGI_APPLICATION = 'thirdLab.wsgi.application'
 
