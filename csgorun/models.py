@@ -1,6 +1,10 @@
-from django.db import models
+import datetime
 
-class User(models.Model):
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
+
+class User(AbstractBaseUser):
 	"""
 	fields:\n
 	name, path_to_icon, balance, items\n
@@ -13,6 +17,11 @@ class User(models.Model):
 	path_to_icon: str = models.CharField(max_length=500)
 	balance: int = models.IntegerField()
 	items: list = models.JSONField(default=list) # items_id
+	password: str = models.CharField(max_length=500, default="1")
+	last_login: datetime.datetime = models.DateTimeField(default=datetime.datetime.now)
+
+	USERNAME_FIELD = 'name'
+	REQUIRED_FIELDS = []
 
 	class Meta:
 		pass
