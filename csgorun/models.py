@@ -97,8 +97,19 @@ class OpenCase(models.Model):
 	case: Case = models.ForeignKey(Case, on_delete=models.CASCADE)
 
 class Transaction(models.Model):
+
+	SUBTRACT_TYPE = "sub"
+	ADDITIVE_TYPE = "add"
+
+	TRANSACTION_TYPES_CHOICE = {
+		SUBTRACT_TYPE: "sub",
+		ADDITIVE_TYPE: "add",
+	}
+
+
 	user: User = models.ForeignKey(User, on_delete=models.CASCADE)
-	transaction_sum = models.IntegerField()
+	transaction_sum: int = models.IntegerField()
+	transaction_type: str = models.CharField(max_length=3, choices=TRANSACTION_TYPES_CHOICE, default=SUBTRACT_TYPE)
 
 class Quality(models.Model):
 	BATTLE_SCARED = "BS"
