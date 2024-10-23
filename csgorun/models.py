@@ -82,9 +82,6 @@ class Case(models.Model):
 	class Meta:
 		pass
 
-class Gun(models.Model):
-	name = models.CharField(max_length=50, default="ssg08", unique=True)
-
 class Quality(models.Model):
 	BATTLE_SCARED = "BS"
 	WELL_WORN = "WW"
@@ -106,8 +103,7 @@ class Quality(models.Model):
 	)
 
 class Skin(models.Model):
-	quality: Quality = models.ForeignKey(Quality, on_delete=models.CASCADE)
-	gun: Gun = models.ForeignKey(Gun, on_delete=models.CASCADE)
+	quality: Quality = models.ForeignKey(Quality, on_delete=models.CASCADE, default=0)
 	name: str = models.CharField(max_length=50)
 	path_to_icon: str = models.CharField(max_length=500)
 	cost: int = models.IntegerField()
