@@ -14,13 +14,14 @@ class User(AbstractBaseUser):
 	add_item
 	"""
 	name: str = models.CharField(max_length=50)
+	login_id: str = models.CharField(max_length=50)
 	path_to_icon: str = models.CharField(max_length=500)
 	balance: int = models.IntegerField()
 	items: list = models.JSONField(default=list) # items_id
 	password: str = models.CharField(max_length=500, default="1")
 	last_login: datetime.datetime = models.DateTimeField(default=datetime.datetime.now)
 
-	USERNAME_FIELD = 'name'
+	USERNAME_FIELD = 'login_id'
 	REQUIRED_FIELDS = []
 
 	class Meta:
