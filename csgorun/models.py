@@ -14,7 +14,7 @@ class User(AbstractBaseUser):
 	add_item
 	"""
 	name: str = models.CharField(max_length=50)
-	login_id: str = models.CharField(max_length=50)
+	login_id: str = models.CharField(max_length=50, default="unnique_login")
 	path_to_icon: str = models.CharField(max_length=500)
 	balance: int = models.IntegerField()
 	items: list = models.JSONField(default=list) # items_id
@@ -91,6 +91,14 @@ class Case(models.Model):
 	pull: list  = models.JSONField(default=list)
 	class Meta:
 		pass
+
+class OpenCase(models.Model):
+	user: User = models.ForeignKey(User, on_delete=models.CASCADE)
+	case: Case = models.ForeignKey(Case, on_delete=models.CASCADE)
+
+class Transaction(models.Model):
+	user: User = models.ForeignKey(User, on_delete=models.CASCADE)
+	transaction_sum = models.IntegerField()
 
 class Quality(models.Model):
 	BATTLE_SCARED = "BS"
