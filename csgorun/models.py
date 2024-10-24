@@ -1,6 +1,10 @@
-from django.db import models
+import datetime
 
-class User(models.Model):
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
+
+class User(AbstractBaseUser):
 	"""
 	fields:\n
 	name, path_to_icon, balance, items\n
@@ -10,9 +14,15 @@ class User(models.Model):
 	add_item
 	"""
 	name: str = models.CharField(max_length=50)
+	login_id: str = models.CharField(max_length=50, default="unnique_login")
 	path_to_icon: str = models.CharField(max_length=500)
 	balance: int = models.IntegerField()
 	items: list = models.JSONField(default=list) # items_id
+	password: str = models.CharField(max_length=500, default="1")
+	last_login: datetime.datetime = models.DateTimeField(default=datetime.datetime.now)
+
+	USERNAME_FIELD = 'login_id'
+	REQUIRED_FIELDS = []
 
 	class Meta:
 		pass
@@ -81,6 +91,25 @@ class Case(models.Model):
 	pull: list  = models.JSONField(default=list)
 	class Meta:
 		pass
+
+class OpenCase(models.Model):
+	user: User = models.ForeignKey(User, on_delete=models.CASCADE)
+	case: Case = models.ForeignKey(Case, on_delete=models.CASCADE)
+
+class Transaction(models.Model):
+
+	SUBTRACT_TYPE = "sub"
+	ADDITIVE_TYPE = "add"
+
+	TRANSACTION_TYPES_CHOICE = {
+		SUBTRACT_TYPE: "sub",
+		ADDITIVE_TYPE: "add",
+	}
+
+
+	user: User = models.ForeignKey(User, on_delete=models.CASCADE)
+	transaction_sum: int = models.IntegerField()
+	transaction_type: str = models.CharField(max_length=3, choices=TRANSACTION_TYPES_CHOICE, default=SUBTRACT_TYPE)
 
 class Quality(models.Model):
 	BATTLE_SCARED = "BS"
