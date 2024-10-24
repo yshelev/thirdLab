@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -10,6 +11,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    r'templates\csgorun\No Money_files',
+    ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',

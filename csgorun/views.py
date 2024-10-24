@@ -5,13 +5,12 @@ from .models import User, Case
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    user = User.objects.get(id=1)
-    cases = Case.objects.all()
-    return render(request, "csgorun/index.html", context={"user": user, "cases": cases})
+    return render(request, "csgorun/cases_cs_2.html")
+
 
 
 def case(request: HttpRequest, name: str) -> HttpResponse:
     user = User.objects.get(id=1)
     case = get_object_or_404(Case, name=name)
-    return render(request, 'csgorun/case.html', {"user": user, "case": case})
+    return render(request, 'csgorun/cases_cs_2.html', {"user": user, "case": case})
 
