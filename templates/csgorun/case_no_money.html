@@ -240,10 +240,10 @@
 
 {% block content %}
   <ul class="grid grid-cols-3 tiny:grid-cols-4 sm:grid-fill-30 lg:flex flex-wrap justify-center gap-1.5">
-    {% for item in items %}
+    {% for skin in skins %}
       <li class="lg:w-[10.35rem] lg:[&gt;*]:h-45">
-        <div class="h-38 lg:h-49 overflow-hidden relative z-1 text-tiny tiny:text-sm lg:text-base flex aspect-[140/178] w-full rounded bg-[#242c48] bg-gradient-var pb-3 text-left text-[--color]" data-item-color="{{ item.color }}">
-          <img src="{{ item.image }}" class="m-auto aspect-square object-contain w-[60%] sm:w-[50%]" width="175" height="175" alt="">
+        <div class="h-38 lg:h-49 overflow-hidden relative z-1 text-tiny tiny:text-sm lg:text-base flex aspect-[140/178] w-full rounded bg-[#242c48] bg-gradient-var pb-3 text-left text-[--color]" data-item-color="{{ skin.color }}">
+          <img src="{% static skin.path_to_icon %}" class="m-auto aspect-square object-contain w-[60%] sm:w-[50%]" width="175" height="175" alt="">
           <div class="absolute left-1/2 top-1/2 -z-1 aspect-square -translate-x-1/2 -translate-y-1/2 w-13 -mt-2 sm:w-15">
             <div class="absolute inset-0 rounded-full bg-gradient-radial-var opacity-50"></div>
             <div class="relative h-full w-full">
@@ -256,12 +256,12 @@
             </div>
           </div>
           <div class="absolute inset-x-1.5 z-1 top-2.5 flex items-center justify-between lg:inset-x-2.5">
-            <div class="bg-color-mix-20 px-1.5 lg:px-2 h-5 lg:h-6 flex items-center justify-center rounded-sm uppercase text-[0.6rem] lg:text-nano font-bold">{{ item.prefix }}</div>
-            <div class="pr-0.5 sm:pr-1 md:pr-2 text-tiny tiny:text-sm font-bold ml-auto text-[#ffc6b0]">{{ item.price }}₽</div>
+            <div class="bg-color-mix-20 px-1.5 lg:px-2 h-5 lg:h-6 flex items-center justify-center rounded-sm uppercase text-[0.6rem] lg:text-nano font-bold">{{ skin.quality.name }}</div>
+            <div class="pr-0.5 sm:pr-1 md:pr-2 text-tiny tiny:text-sm font-bold ml-auto text-[#ffc6b0]">{{ skin.cost }}₽</div>
           </div>
           <div class="absolute inset-x-2.5 bottom-2 leading-tight lg:inset-x-4.5 lg:bottom-2.5">
-            <div class="text-white">{{ item.name }}</div>
-            <div>{{ item.skin }}</div>
+            <div class="text-white">{% if skin.is_statTrak %}StatTrak{%endif%}{{ skin.gun_name }}</div>
+            <div>{{ skin.name }}</div>
           </div>
         </div>
       </li>
