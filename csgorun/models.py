@@ -49,7 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 	"""
     email = models.CharField(max_length=255)
     steamid = models.CharField(max_length=17, unique=True)
-    personaname = models.CharField(max_length=255)
+    personalname = models.CharField(max_length=255)
     profileurl = models.CharField(max_length=300)
     avatar = models.CharField(max_length=255)
     avatarmedium = models.CharField(max_length=255)
@@ -73,10 +73,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
     def get_short_name(self):
-        return self.personaname
+        return self.personalname
 
     def get_full_name(self):
-        return self.personaname
+        return self.personalname
 
     def add_item(self, item_id):
         try:
@@ -131,7 +131,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return True
 
     def __repr__(self):
-        return f'User {self.name} with balance {self.balance}'
+        return f'User {self.personalname} with balance {self.balance}'
 
 
 class Case(models.Model):
