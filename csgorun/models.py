@@ -118,14 +118,15 @@ class Rarity(models.Model):
 	LEGENDARY: int = 5
 	ANCIENT: int = 7
 
-	rarity_choices = {
+	RARITY_CHOICES = {
 		UNCOMMON: "uncommon",
 		RARE: "rare",
 		LEGENDARY: "legendary",
 		ANCIENT: "ancient",
 	}
 
-	index: int = models.IntegerField(choices=rarity_choices, unique=True)
+	index: int = models.IntegerField(choices=RARITY_CHOICES, unique=True)
+	name: str = models.CharField(max_length=50, unique=True, blank=True, null=True)
 
 class Quality(models.Model):
 	BATTLE_SCARED = "BS"

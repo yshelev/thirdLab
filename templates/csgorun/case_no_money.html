@@ -134,7 +134,7 @@
                 </a></li>
               <li class="odd:max-md:last:col-span-full relative"><a
                   class="group relative z-1 flex h-18 pt-0.5 flex-col justify-center overflow-hidden  rounded-xl bg-gradient-var-to-r pl-4.5 text-sm uppercase text-[#a6adcd] transition [--from:#212842] [--to:#2d3656] aria-pressed:text-[#c2dcfc]"
-                  aria-pressed="false" href="https://csgoad.run/cases">
+                  aria-pressed="false" href="http://localhost:8000">
                   <div
                     class="absolute inset-0 -z-1 bg-gradient-var opacity-0 transition [--from:#3d76d1] [--to:#2756a280] group-aria-pressed:opacity-99">
                   </div>
@@ -202,8 +202,8 @@
 
                         
                         {% for skin in skins %}
-                          <div class="px-px [&amp;:not(.active)]:opacity-20 [.roulette-initial-state_&amp;]:opacity-100 shrink-0 transition-opacity h-full" data-index="{{ skin.quality.name }}" style="width: 142px;">
-                            <div class="drop text-center h-full aspect-auto w-25 md:w-35 bg-[#293252]" data-item-color="{{ skin.rarity }}">
+                          <div class="px-px [&amp;:not(.active)]:opacity-20 [.roulette-initial-state_&amp;]:opacity-100 shrink-0 transition-opacity h-full" data-index="{{ skin.rarity.index }}" style="width: 142px;">
+                            <div class="drop text-center h-full aspect-auto w-25 md:w-35 bg-[#293252]" data-item-color="{{ skin.rarity.index }}">
                               <img src="{% static skin.path_to_icon %}" width="175" height="175" alt="">
                               <div class="drop__header max-md:top-2 max-md:inset-x-2">
                                 <div class="drop__quality">{{ skin.quality.name }}</div>
@@ -242,7 +242,7 @@
   <ul class="grid grid-cols-3 tiny:grid-cols-4 sm:grid-fill-30 lg:flex flex-wrap justify-center gap-1.5">
     {% for skin in skins %}
       <li class="lg:w-[10.35rem] lg:[&gt;*]:h-45">
-        <div class="h-38 lg:h-49 overflow-hidden relative z-1 text-tiny tiny:text-sm lg:text-base flex aspect-[140/178] w-full rounded bg-[#242c48] bg-gradient-var pb-3 text-left text-[--color]" data-item-color="{{ skin.color }}">
+        <div class="h-38 lg:h-49 overflow-hidden relative z-1 text-tiny tiny:text-sm lg:text-base flex aspect-[140/178] w-full rounded bg-[#242c48] bg-gradient-var pb-3 text-left text-[--color]" data-item-color="{{ skin.rarity.index }}">
           <img src="{% static skin.path_to_icon %}" class="m-auto aspect-square object-contain w-[60%] sm:w-[50%]" width="175" height="175" alt="">
           <div class="absolute left-1/2 top-1/2 -z-1 aspect-square -translate-x-1/2 -translate-y-1/2 w-13 -mt-2 sm:w-15">
             <div class="absolute inset-0 rounded-full bg-gradient-radial-var opacity-50"></div>
