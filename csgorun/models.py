@@ -18,7 +18,7 @@ class User(AbstractBaseUser):
 	login_id: str = models.CharField(max_length=50, default="unnique_login")
 	path_to_icon: str = models.CharField(max_length=500)
 	balance: int = models.IntegerField()
-	items: list = models.JSONField(default=list) # items_id
+	items: list = models.JSONField(default=list) # items_ids
 	password: str = models.CharField(max_length=500, default="1")
 	last_login: datetime.datetime = models.DateTimeField(default=datetime.datetime.now)
 
@@ -89,7 +89,7 @@ class Case(models.Model):
 	name: str = models.CharField(max_length=50)
 	cost: int = models.IntegerField()
 	path_to_icon: str = models.CharField(max_length=500)
-	pull: list  = models.JSONField(default=[])
+	pull: list  = models.JSONField(default=list)
 	class Meta:
 		pass
 
@@ -140,21 +140,8 @@ class Skin(models.Model):
 	is_souvenir: bool = models.BooleanField(default=False)
 	quality: Quality = models.ForeignKey(Quality, on_delete=models.CASCADE, default=0)
 	name: str = models.CharField(max_length=50)
-	gun_name: str = models.CharField(max_length=50)
+	gun_name: str = models.CharField(max_length=50, default="_")
 	path_to_icon: str = models.CharField(max_length=500)
 	cost: int = models.IntegerField()
 	class Meta:
 		pass
-
-class SkinSerializer(serializers.ModelSerializer):
-	is_statTrek: bool = serializers.BooleanField(default=False)
-	is_souvenir: bool = serializers.BooleanField(default=False)
-	quality: Quality = serializers.StringRelatedField()
-	name: str = serializers.CharField(max_length=50)
-	gun_name: str = serializers.CharField(max_length=50)
-	path_to_icon: str = serializers.CharField(max_length=500)
-	cost: int = serializers.IntegerField()
-
-	class Meta:
-		model = Skin
-		fields = '__all__'
