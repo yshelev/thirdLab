@@ -160,7 +160,7 @@
                     <source srcset="No Money_files/botgame-preview-sm.avif 1x"
                       type="image/avif">
                     <source srcset="No Money_files/botgame-preview-sm.webp 1x"
-                      type="image/webp"><img src="No Money_files/botgame-preview-sm.webp"
+                      type="image/webp"><img src="static/No Money_files/botgame-preview-sm.webp"
                       alt="Кейсбатл" class="w-full h-full object-contain object-right" width="159" height="69">
                   </picture>
                   <div class="relative mb-0.5 text-tiny font-bold leading-none text-[#e6eeff]" translate="no">Кейсбатл
@@ -170,7 +170,7 @@
             <div class="relative z-1 flex items-center overflow-hidden -mt-4 py-4">
               <div class="dots-ill  left-1/2 -top-6 opacity-20 -translate-x-1/2 -z-1  w-40 bg-[#6b8cc1]"></div><a
                 class="btn aspect-square w-9 sm:w-10 self-center  rounded bg-[#242c48] text-[#a6adcd] transition-colors hover:text-white absolute  left-0"
-                aria-label="Назад" title="Назад" href="https://csgoad.run/cases"><svg xmlns="http://www.w3.org/2000/svg"
+                aria-label="Назад" title="Назад" href="/"><svg xmlns="http://www.w3.org/2000/svg"
                   width="10" height="8" viewBox="0 0 492 409.31" aria-hidden="true"
                   class="w-3 fill-current  -scale-x-100">
                   <path
@@ -201,17 +201,17 @@
                       <div class="flex w-full roulette-initial-state" style="width: 1200px;">
 
                         
-                        {% for gun in guns %}
-                          <div class="px-px [&amp;:not(.active)]:opacity-20 [.roulette-initial-state_&amp;]:opacity-100 shrink-0 transition-opacity h-full" data-index="{{ gun.index }}" style="width: 142px;">
-                            <div class="drop text-center h-full aspect-auto w-25 md:w-35 bg-[#293252]" data-item-color="{{ gun.rarity }}">
-                              <img src="No Money_files/medium_{{ gun.image }}" width="175" height="175" alt="">
+                        {% for skin in skins %}
+                          <div class="px-px [&amp;:not(.active)]:opacity-20 [.roulette-initial-state_&amp;]:opacity-100 shrink-0 transition-opacity h-full" data-index="{{ skin.quality.name }}" style="width: 142px;">
+                            <div class="drop text-center h-full aspect-auto w-25 md:w-35 bg-[#293252]" data-item-color="{{ skin.rarity }}">
+                              <img src="{% static skin.path_to_icon %}" width="175" height="175" alt="">
                               <div class="drop__header max-md:top-2 max-md:inset-x-2">
-                                <div class="drop__quality">{{ gun.rarity }}</div>
-                                <div class="drop__price">{{ gun.price }}₽</div>
+                                <div class="drop__quality">{{ skin.quality.name }}</div>
+                                <div class="drop__price">{{ skin.cost }}₽</div>
                               </div>
                               <div class="drop__footer max-md:bottom-1.5">
-                                <div class="text-white">{{ gun.name }}</div>
-                                <div>{{ gun.skin }}</div>
+                                <div class="text-white">{{ skin.gun_name }}</div>
+                                <div>{{ skin.name }}</div>
                               </div>
                             </div>
                           </div>
