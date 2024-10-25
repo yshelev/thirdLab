@@ -122,13 +122,13 @@ class Rarity(models.Model):
 	IMMORTAL: int = 7
 
 	rarity_choices = {
-		COMMON: (1, "common"),
-		UNCOMMON: (2, "uncommon"),
-		RARE: (3, "rare"),
-		MYTHICAL: (4, "mythical"),
-		LEGENDARY: (5, "legendary"),
-		ANCIENT: (6, "ancient"),
-		IMMORTAL: (7, "immortal"),
+		COMMON: "common",
+		UNCOMMON: "uncommon",
+		RARE: "rare",
+		MYTHICAL: "mythical",
+		LEGENDARY: "legendary",
+		ANCIENT: "ancient",
+		IMMORTAL: "immortal",
 	}
 
 	index: int = models.IntegerField(choices=rarity_choices)
