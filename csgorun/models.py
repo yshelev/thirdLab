@@ -140,6 +140,7 @@ class Skin(models.Model):
 	is_souvenir: bool = models.BooleanField(default=False)
 	quality: Quality = models.ForeignKey(Quality, on_delete=models.CASCADE, default=0)
 	name: str = models.CharField(max_length=50)
+	gun_name: str = models.CharField(max_length=50)
 	path_to_icon: str = models.CharField(max_length=500)
 	cost: int = models.IntegerField()
 	class Meta:
@@ -150,6 +151,7 @@ class SkinSerializer(serializers.ModelSerializer):
 	is_souvenir: bool = serializers.BooleanField(default=False)
 	quality: Quality = serializers.StringRelatedField()
 	name: str = serializers.CharField(max_length=50)
+	gun_name: str = serializers.CharField(max_length=50)
 	path_to_icon: str = serializers.CharField(max_length=500)
 	cost: int = serializers.IntegerField()
 
