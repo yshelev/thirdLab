@@ -14,6 +14,7 @@ class UserManager(BaseUserManager):
 
         if not steamid:
             raise ValueError('The given steamid must be set')
+        print(steamid, password)
         user = self.model(steamid=steamid, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -27,15 +28,14 @@ class UserManager(BaseUserManager):
     def create_superuser(self, steamid, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('balance', -1)
-        extra_fields.setdefault('steamid', steamid)
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
 
-        return self._create_user(steamid, password, **extra_fields)
+        user = self._create_user(steamid, password, **extra_fields)
+        return user
 
 
 class User(AbstractBaseUser, PermissionsMixin):
