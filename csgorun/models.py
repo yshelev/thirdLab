@@ -112,6 +112,28 @@ class Transaction(models.Model):
 	transaction_sum: int = models.IntegerField()
 	transaction_type: str = models.CharField(max_length=3, choices=TRANSACTION_TYPES_CHOICE, default=SUBTRACT_TYPE)
 
+class Rarity(models.Model):
+	COMMON: int = 1
+	UNCOMMON: int = 2
+	RARE: int = 3
+	MYTHICAL: int = 4
+	LEGENDARY: int = 5
+	ANCIENT: int = 6
+	IMMORTAL: int = 7
+
+	rarity_choices = {
+		COMMON: (1, "common"),
+		UNCOMMON: (2, "uncommon"),
+		RARE: (3, "rare"),
+		MYTHICAL: (4, "mythical"),
+		LEGENDARY: (5, "legendary"),
+		ANCIENT: (6, "ancient"),
+		IMMORTAL: (7, "immortal"),
+	}
+
+	index: int = models.IntegerField(choices=rarity_choices)
+	name: str = models.CharField(max_length=50, choices=rarity_choices)
+
 class Quality(models.Model):
 	BATTLE_SCARED = "BS"
 	WELL_WORN = "WW"
@@ -142,6 +164,7 @@ class Skin(models.Model):
 	name: str = models.CharField(max_length=50)
 	gun_name: str = models.CharField(max_length=50, default="_")
 	path_to_icon: str = models.CharField(max_length=500)
+	rarity: Rarity = models.ForeignKey(Rarity, on_delete=models.CASCADE, default=1)
 	cost: int = models.IntegerField()
 	class Meta:
 		pass
