@@ -9,6 +9,14 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "csgorun/cases_cs_2.html", context={"cases": cases})
 
 def case(request: HttpRequest, name: str) -> HttpResponse:
-    user = User.objects.get(id=1)
-    return render(request, f'csgorun/case_{name}.html', {"user": user})
+    case_ = Case.objects.get(name=name)
+
+    skins = []
+
+    for skin_id in case_.pull:
+        skins.append(Skin.objects.get(id=skin_id))
+
+    skins.sort(key=lambda skin: skin.cost, reverse=True)
+
+    return render(request, f'csgorun/case_{name}.html', {"skins": skins})
 

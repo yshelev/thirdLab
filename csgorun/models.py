@@ -162,6 +162,22 @@ class Transaction(models.Model):
     transaction_sum: int = models.IntegerField()
     transaction_type: str = models.CharField(max_length=3, choices=TRANSACTION_TYPES_CHOICE, default=SUBTRACT_TYPE)
 
+class Rarity(models.Model):
+	UNCOMMON: int = 1
+	RARE: int = 3
+	LEGENDARY: int = 5
+	ANCIENT: int = 7
+
+	RARITY_CHOICES = {
+		UNCOMMON: "uncommon",
+		RARE: "rare",
+		LEGENDARY: "legendary",
+		ANCIENT: "ancient",
+	}
+
+	index: int = models.IntegerField(choices=RARITY_CHOICES, unique=True)
+	name: str = models.CharField(max_length=50, unique=True, blank=True, null=True)
+
 
 class Quality(models.Model):
     BATTLE_SCARED = "BS"
@@ -186,15 +202,14 @@ class Quality(models.Model):
     def __str__(self):
         return self.name
 
-
 class Skin(models.Model):
-    is_statTrek: bool = models.BooleanField(default=False)
-    is_souvenir: bool = models.BooleanField(default=False)
-    quality: Quality = models.ForeignKey(Quality, on_delete=models.CASCADE, default=0)
-    name: str = models.CharField(max_length=50)
-    gun_name: str = models.CharField(max_length=50, default="_")
-    path_to_icon: str = models.CharField(max_length=500)
-    cost: int = models.IntegerField()
-
-    class Meta:
-        pass
+	is_statTrek: bool = models.BooleanField(default=False)
+	is_souvenir: bool = models.BooleanField(default=False)
+	quality: Quality = models.ForeignKey(Quality, on_delete=models.CASCADE, default=0)
+	name: str = models.CharField(max_length=50)
+	gun_name: str = models.CharField(max_length=50, default="_")
+	path_to_icon: str = models.CharField(max_length=500)
+	rarity: Rarity = models.ForeignKey(Rarity, on_delete=models.CASCADE, null=True, blank=True)
+	cost: int = models.IntegerField()
+	class Meta:
+		pass
