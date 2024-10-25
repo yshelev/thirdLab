@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib.auth.models import AbstractUser
+from rest_framework import serializers
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 
@@ -88,7 +89,7 @@ class Case(models.Model):
 	name: str = models.CharField(max_length=50)
 	cost: int = models.IntegerField()
 	path_to_icon: str = models.CharField(max_length=500)
-	pull: list  = models.JSONField(default=list)
+	pull: list  = models.JSONField(default=[])
 	class Meta:
 		pass
 
@@ -131,10 +132,27 @@ class Quality(models.Model):
 		unique=True
 	)
 
+	def __str__(self):
+		return self.name
+
 class Skin(models.Model):
+	is_statTrek: bool = models.BooleanField(default=False)
+	is_souvenir: bool = models.BooleanField(default=False)
 	quality: Quality = models.ForeignKey(Quality, on_delete=models.CASCADE, default=0)
 	name: str = models.CharField(max_length=50)
 	path_to_icon: str = models.CharField(max_length=500)
 	cost: int = models.IntegerField()
 	class Meta:
 		pass
+
+class SkinSerializer(serializers.ModelSerializer):
+	is_statTrek: bool = serializers.BooleanField(default=False)
+	is_souvenir: bool = serializers.BooleanField(default=False)
+	quality: Quality = serializers.StringRelatedField()
+	name: str = serializers.CharField(max_length=50)
+	path_to_icon: str = serializers.CharField(max_length=500)
+	cost: int = serializers.IntegerField()
+
+	class Meta:
+		model = Skin
+		fields = '__all__'

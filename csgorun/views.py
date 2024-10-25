@@ -1,16 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpRequest
-from .models import User, Case
+from .models import *
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    return render(request, "csgorun/cases_cs_2.html")
-
-
+    cases = Case.objects.all().order_by("cost")
+    return render(request, "csgorun/cases_cs_2.html", context={"cases": cases})
 
 def case(request: HttpRequest, name: str) -> HttpResponse:
     user = User.objects.get(id=1)
-    case = get_object_or_404(Case, name=name)
-    return render(request, 'csgorun/cases_cs_2.html', {"user": user, "case": case})
+    return render(request, f'csgorun/case_{name}.html', {"user": user})
 

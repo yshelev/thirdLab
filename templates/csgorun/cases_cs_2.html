@@ -202,7 +202,7 @@
                         {% load static %}
                         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-fill-50 lg:flex flex-wrap justify-center">
                             {% for case in cases %}
-                            <a class="block rounded-3xl relative z-1 hover:z-2 aspect-[290/370] md:aspect-[290/350] lg:w-1/5 group" href='case_no_money.html'>
+                            <a class="block rounded-3xl relative z-1 hover:z-2 aspect-[290/370] md:aspect-[290/350] lg:w-1/5 group" href='cases/no_money'>
                                 <div class="mx-[-4%] pointer-events-none">
                                     <img src="{% static case.path_to_icon %}" width="200" height="200"
                                          alt="{{ case.name }}"
