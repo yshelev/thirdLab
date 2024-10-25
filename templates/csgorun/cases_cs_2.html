@@ -59,13 +59,15 @@
                             <div class="icon w-5.75" style="mask-image: url(&quot;/svg/telegram.svg&quot;);"></div>
                         </a></li>
                     </ul>
-                    <button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:"
-                            data-state="closed"
-                            class="btn btn--green h-11 shrink-0 gap-2.5 lg:gap-3 rounded pl-3.5 lg:pl-4.5 pr-3 lg:pr-3.5 text-tiny font-bold  uppercase lg:h-12.5">
-                        Авторизация
-                        <div class="icon w-5.5 -mt-0.5 lg:-mt-1"
-                             style="mask-image: url(&quot;/svg/lock.svg&quot;);"></div>
-                    </button>
+                    <a href="login/steam">
+                        <button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:"
+                                data-state="closed"
+                                class="btn btn--green h-11 shrink-0 gap-2.5 lg:gap-3 rounded pl-3.5 lg:pl-4.5 pr-3 lg:pr-3.5 text-tiny font-bold  uppercase lg:h-12.5">
+                            Авторизация
+                            <div class="icon w-5.5 -mt-0.5 lg:-mt-1"
+                                 style="mask-image: url(&quot;/svg/lock.svg&quot;);"></div>
+                        </button>
+                    </a>
                 </header>
                 <div
                         class="mx-auto w-full  min-h-[calc(100svh-10rem)] lg:min-h-[calc(100vh-7rem)] flex flex-col lg:w-[--container-w] [&amp;:has([data-inventory-sticky]:not([inert]))]:pb-[--inventory-h]">
@@ -202,21 +204,22 @@
                         {% load static %}
                         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-fill-50 lg:flex flex-wrap justify-center">
                             {% for case in cases %}
-                            <a class="block rounded-3xl relative z-1 hover:z-2 aspect-[290/370] md:aspect-[290/350] lg:w-1/5 group" href='cases/no_money'>
-                                <div class="mx-[-4%] pointer-events-none">
-                                    <img src="{% static case.path_to_icon %}" width="200" height="200"
-                                         alt="{{ case.name }}"
-                                         class="w-full will-change-transform object-contain pointer-events-none group-hover:scale-105 transition group-hover:brightness-110 group-hover:rotate-[4deg]">
-                                </div>
-                                <div class="absolute text-center bottom-0 inset-x-3">
-                                    <div class="lg:text-xl leading-tight">{{ case.name }}</div>
-                                    <div class="flex items-center text-sm lg:text-base justify-center mt-2 mx-auto gap-1.5">
-                                        <div class="h-8 lg:h-9.5 flex items-center justify-center text-[#212944] w-fit px-2 lg:px-3 rounded bg-gradient-var [--from:#ffd4c2] [--to:#ffbfa6] font-extrabold">
-                                            {{ case.cost }}₽
+                                <a class="block rounded-3xl relative z-1 hover:z-2 aspect-[290/370] md:aspect-[290/350] lg:w-1/5 group"
+                                   href='cases/no_money'>
+                                    <div class="mx-[-4%] pointer-events-none">
+                                        <img src="{% static case.path_to_icon %}" width="200" height="200"
+                                             alt="{{ case.name }}"
+                                             class="w-full will-change-transform object-contain pointer-events-none group-hover:scale-105 transition group-hover:brightness-110 group-hover:rotate-[4deg]">
+                                    </div>
+                                    <div class="absolute text-center bottom-0 inset-x-3">
+                                        <div class="lg:text-xl leading-tight">{{ case.name }}</div>
+                                        <div class="flex items-center text-sm lg:text-base justify-center mt-2 mx-auto gap-1.5">
+                                            <div class="h-8 lg:h-9.5 flex items-center justify-center text-[#212944] w-fit px-2 lg:px-3 rounded bg-gradient-var [--from:#ffd4c2] [--to:#ffbfa6] font-extrabold">
+                                                {{ case.cost }}₽
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
                             {% endfor %}
                         </div>
 

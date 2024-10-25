@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import User, Case
 
-admin.site.register(User)
-admin.site.register(Case)
+from csgorun.models import User
+
+
+@admin.register(User)
+class SteamUserAdmin(admin.ModelAdmin):
+    pass
