@@ -198,7 +198,7 @@
                   <div
                     class="flex w-full h-full pt-3 pb-2 md:py-5 overflow-hidden [mask-image:linear-gradient(90deg,#00000000,black_20%,black_80%,#00000000)]">
                     <div class="w-full flex">
-                      <div class="flex w-full roulette-initial-state" style="width: 1200px;">
+                      <div id="roulette-container" class="flex w-full roulette-initial-state" style="width: 1200px;">
 
                         
                         {% for skin in skins %}
@@ -227,11 +227,23 @@
             </div>
             <div
               class="bg-[#1e253d] gap-y-4 gap-x-2 py-4 md:py-0 md:h-25 flex flex-wrap justify-center sm:flex-nowrap sm:justify-between items-center rounded-3xl relative z-1">
-              <div class="md:mx-auto order-first w-full flex justify-center sm:contents"><button type="button"
-                  class="btn  btn--blue h-12.5 lg:h-14.5 gap-4 lg:gap-3 rounded-lg pl-4 sm:pl-5.5 pr-4 sm:pr-5 text-tiny font-bold uppercase justify-between lg:mt-0 md:min-w-53.5"><span>Открыть</span>
+              <div class="md:mx-auto order-first w-full flex justify-center sm:contents">
+                <button type="button" id="rotate-button" class="btn btn--blue h-12.5 lg:h-14.5 gap-4 lg:gap-3 rounded-lg pl-4 sm:pl-5.5 pr-4 sm:pr-5 text-tiny font-bold uppercase justify-between lg:mt-0 md:min-w-53.5">
+                  <span>Открыть</span>
                   <div class="text-sm lg:text-base flex items-center gap-2">0.69₽</div>
-                </button></div>
+                </button>
+              </div>
             </div>
+            <script>
+              document.getElementById('rotate-button').addEventListener('click', function() {
+                var container = document.getElementById('roulette-container');
+                var items = container.querySelectorAll('.drop');
+                
+                for (var i = items.length - 1; i >= 0; i--) {
+                  container.appendChild(items[i]);
+                }
+              });
+            </script>
             <section class="pt-4 lg:pt-6">
               <header class="section-header justify-center px-0 mb-4">
                 <h2 class="title z-3 relative">Содержимое кейса</h2>
