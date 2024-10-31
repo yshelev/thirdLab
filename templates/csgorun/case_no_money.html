@@ -159,68 +159,40 @@
                 </div>
               </div>
               <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                  const rotateButton = document.getElementById('rotate-button')
-                  const rouletteContainer = document.getElementById('roulette-container')
-                  const items = rouletteContainer.querySelectorAll('div[data-index]')
-                  const itemWidth = items[0].getBoundingClientRect().width
-                  let animationDuration = 2000 
-                  let animationSpeed = 1 
-                  let isRotating = false
+                const rotateButton = document.getElementById('rotate-button')
+                const rouletteContainer = document.getElementById('roulette-container')
+                const items = rouletteContainer.children
                 
-                  rotateButton.addEventListener('click', function () {
-                    if (isRotating) return
-                    isRotating = true
+                let isRotating = false
+                let animationDuration = 3000
+                let animationSpeed = 0.5
                 
-                    rotateButton.disabled = true
+                rotateButton.addEventListener('click', () => {
+                  if (isRotating) return
+                  isRotating = true
                 
-                    const containerWidth = rouletteContainer.getBoundingClientRect().width
-                    const totalItemsWidth = items.length * itemWidth
-                    const rotations = (animationDuration / 1000) * (totalItemsWidth / containerWidth)
-                
-                    const winningIndex = Math.floor(Math.random() * items.length)
-                
-                    const offset = winningIndex * itemWidth + totalItemsWidth * rotations
-                    const centeredOffset = offset - containerWidth / 2 + itemWidth / 2
-                
-                    rouletteContainer.style.transitionDuration = animationDuration * animationSpeed + 'ms'
-                    rouletteContainer.style.transitionTimingFunction = 'cubic-bezier(0.4, 0, 0.2, 1)'
-                
-                    for (let i = 0; i < items.length; i++) {
+                  rouletteContainer.style.transitionDuration = '0s'
+                  rouletteContainer.style.transform = 'translateX(0)'
+                  setTimeout(() => {
+                    for (let i = 0; i < 5; i++) {
                       const clone = items[i].cloneNode(true)
                       rouletteContainer.appendChild(clone)
                     }
                 
-                    rouletteContainer.style.transform = `translateX(-${centeredOffset}px)`
+                    rouletteContainer.style.transitionDuration = `${animationDuration * animationSpeed}ms`
+                    rouletteContainer.style.transitionTimingFunction = 'cubic-bezier(0.4, 0, 0.2, 1)'
                 
-                    rouletteContainer.addEventListener(
-                      'transitionend',
-                      function onAnimationEnd() {
-                        const previousActiveElement = rouletteContainer.querySelector('.active')
-                        if (previousActiveElement) {
-                          previousActiveElement.classList.remove('active')
-                        }
-                        items[winningIndex].classList.add('active')
+                    const itemWidth = items[0].offsetWidth
+                    rouletteContainer.style.transform = `translateX(-${itemWidth}px)`
+                  }, 100)
                 
-                        rouletteContainer.style.transform = 'translateX(0)'
-                        rouletteContainer.style.transitionDuration = '0s'
-                
-                        rotateButton.disabled = false
-                        isRotating = false
-                
-                        if (rouletteContainer.ontransitionend === onAnimationEnd) {
-                          rouletteContainer.removeEventListener('transitionend', onAnimationEnd)
-                        }
-                
-                        
-                        const clones = rouletteContainer.querySelectorAll('.clone')
-                        clones.forEach((clone) => clone.remove())
-                      },
-                      { once: true }
-                    )
-                  })
+                  setTimeout(() => {
+                    isRotating = false
+                    rouletteContainer.style.transitionDuration = '0s'
+                  }, animationDuration * animationSpeed)
                 })
               </script>
+
               <section class="pt-4 lg:pt-6">
                 <header class="section-header justify-center px-0 mb-4">
                   <h2 class="title z-3 relative">Содержимое кейса</h2>
