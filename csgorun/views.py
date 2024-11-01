@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.http import HttpRequest
@@ -23,7 +25,11 @@ def case(request: HttpRequest, name: str) -> HttpResponse:
 
 def case_api(request: HttpRequest, name: str) -> JsonResponse:
     case_ = Case.objects.get(name=name)
+    output_container: list = []
     print(case_.pull)
+    for i in range(50):
+        output_container.append(random.choice(case_.pull))
 
-    return JsonResponse(case_.pull, safe=False)
+    # output_container = list(map(Skin.objects.get()))
+    return JsonResponse(output_container, safe=False)
 

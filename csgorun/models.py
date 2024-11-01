@@ -16,7 +16,6 @@ class UserManager(BaseUserManager):
             raise ValueError('The given steamid must be set')
         print(steamid, password)
         user = self.model(steamid=steamid, **extra_fields)
-        user.set_password(password)
         user.save(using=self._db)
         return user
 
@@ -38,7 +37,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(models.Model):
     """
     fields:\n
     name, path_to_icon, balance, items\n
@@ -49,16 +48,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     """
     email = models.CharField(max_length=255)
     steamid = models.CharField(max_length=17, unique=True)
-    personalname = models.CharField(max_length=255)
+    personaname = models.CharField(max_length=255)
     profileurl = models.CharField(max_length=300)
     avatar = models.CharField(max_length=255)
     avatarmedium = models.CharField(max_length=255)
     avatarfull = models.CharField(max_length=255)
 
-    password: str = models.CharField(max_length=500, default="1")
+    password: str = models.CharField(max_length=500, default="")
     last_login: datetime.datetime = models.DateTimeField(default=datetime.datetime.now)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+    is_anonymous = models.BooleanField(default=False)
+    is_authenticated = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'steamid'
     REQUIRED_FIELDS = []
