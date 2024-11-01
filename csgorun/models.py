@@ -70,17 +70,16 @@ class User(models.Model):
     class Meta:
         pass
 
+    def get_short_name(self):
+        return self.personaname
+
+    def get_full_name(self):
+        return self.personaname
+
 class SiteUser(models.Model):
     steamUser: User = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     balance: int = models.IntegerField(default=0)
     items: list = models.JSONField(default=list)  # items_ids
-
-
-    def get_short_name(self):
-        return self.steamUser.personalname
-
-    def get_full_name(self):
-        return self.steamUser.personalname
 
     def add_item(self, item_id):
         try:
