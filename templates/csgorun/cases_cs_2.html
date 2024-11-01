@@ -39,11 +39,6 @@
             <div class="w-full px-2.5 pt-16 lg:pt-0 lg:px-5 lg:pb-5 relative">
                 <header
                         class="flex fixed lg:relative top-0 inset-x-0 lg:inset-auto z-10  pl-4 pr-2 lg:px-0 items-center pb-2 pt-2 lg:py-5 ">
-                    <a aria-label="Home" class="mr-auto lg:mr-3" href="https://csgoad.run/">
-                        <div class="mr-2.5 w-30 shrink-0 lg:w-40 relative pointer-events-none"><img
-                                src="../../static/cases_files/logo.svg" class="w-full" width="153"
-                                height="29" alt="home"></div>
-                    </a>
                     <ul class="flex justify-end mr-1">
                         <li><a href="https://vk.com/csgorun_net" aria-label="VK" title="VK" target="_blank"
                                class="block p-1.5 text-[#dae2f5] hover:text-white  transition" rel="noreferrer">
@@ -63,7 +58,12 @@
                         <button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:"
                                 data-state="closed"
                                 class="btn btn--green h-11 shrink-0 gap-2.5 lg:gap-3 rounded pl-3.5 lg:pl-4.5 pr-3 lg:pr-3.5 text-tiny font-bold  uppercase lg:h-12.5">
-                            Авторизация
+                            {% if user.is_authenticated %}
+                                Профиль
+                            {% else %}
+                                Авторизация
+                            {% endif %}
+
                             <div class="icon w-5.5 -mt-0.5 lg:-mt-1"
                                  style="mask-image: url(&quot;/svg/lock.svg&quot;);"></div>
                         </button>
@@ -71,134 +71,6 @@
                 </header>
                 <div
                         class="mx-auto w-full  min-h-[calc(100svh-10rem)] lg:min-h-[calc(100vh-7rem)] flex flex-col lg:w-[--container-w] [&amp;:has([data-inventory-sticky]:not([inert]))]:pb-[--inventory-h]">
-                    <ul
-                            class="lg:mb-5 grid w-full grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:h-18 lg:grid-cols-[repeat(var(--cols),minmax(0,1fr))]"
-                            style="--cols: 6;">
-                        <li class="odd:max-md:last:col-span-full relative"><a
-                                class="group relative z-1 flex h-18 pt-0.5 flex-col justify-center overflow-hidden  rounded-xl bg-gradient-var-to-r pl-4.5 text-sm uppercase text-[#a6adcd] transition [--from:#212842] [--to:#2d3656] aria-pressed:text-[#c2dcfc]"
-                                aria-pressed="false" href="https://csgoad.run/crash">
-                            <div
-                                    class="absolute inset-0 -z-1 bg-gradient-var opacity-0 transition [--from:#3d76d1] [--to:#2756a280] group-aria-pressed:opacity-99">
-                            </div>
-                            <picture
-                                    class="absolute -z-1 rounded-inherit -mr-2.5 pointer-events-none saturate-50 transition group-hover:saturate-100 group-aria-pressed:saturate-100 inset-0">
-                                <source srcset="../../static/cases_files/crash-preview-sm.avif 1x"
-                                        type="image/avif">
-                                <source srcset="../../static/cases_files/crash-preview-sm.webp 1x"
-                                        type="image/webp">
-                                <img
-                                        src="../../static/cases_files/crash-preview-sm.webp" alt="Crash"
-                                        class="w-full h-full object-contain object-right" width="159" height="69">
-                            </picture>
-                            <div class="relative mb-0.5 text-tiny font-bold leading-none text-[#e6eeff]" translate="no">
-                                Crash
-                            </div>
-                            <span class="tabular-nums relative">127.47₽</span>
-                        </a></li>
-                        <li class="odd:max-md:last:col-span-full relative"><a
-                                class="group relative z-1 flex h-18 pt-0.5 flex-col justify-center overflow-hidden  rounded-xl bg-gradient-var-to-r pl-4.5 text-sm uppercase text-[#a6adcd] transition [--from:#212842] [--to:#2d3656] aria-pressed:text-[#c2dcfc]"
-                                aria-pressed="false" href="https://csgoad.run/double">
-                            <div
-                                    class="absolute inset-0 -z-1 bg-gradient-var opacity-0 transition [--from:#3d76d1] [--to:#2756a280] group-aria-pressed:opacity-99">
-                            </div>
-                            <picture
-                                    class="absolute -z-1 rounded-inherit -mr-2.5 pointer-events-none saturate-50 transition group-hover:saturate-100 group-aria-pressed:saturate-100 inset-0">
-                                <source srcset="../../static/cases_files/double-preview-sm.avif 1x"
-                                        type="image/avif">
-                                <source srcset="../../static/cases_files/double-preview-sm.webp 1x"
-                                        type="image/webp">
-                                <img
-                                        src="../../static/cases_files/double-preview-sm.webp" alt="Double"
-                                        class="w-full h-full object-contain object-right" width="159" height="69">
-                            </picture>
-                            <div class="relative mb-0.5 text-tiny font-bold leading-none text-[#e6eeff]" translate="no">
-                                Double
-                            </div>
-                            <span class="tabular-nums relative">0.00₽</span>
-                        </a></li>
-                        <li class="odd:max-md:last:col-span-full relative"><a
-                                class="group relative z-1 flex h-18 pt-0.5 flex-col justify-center overflow-hidden  rounded-xl bg-gradient-var-to-r pl-4.5 text-sm uppercase text-[#a6adcd] transition [--from:#212842] [--to:#2d3656] aria-pressed:text-[#c2dcfc]"
-                                aria-pressed="false" href="https://csgoad.run/jackrun">
-                            <div
-                                    class="absolute inset-0 -z-1 bg-gradient-var opacity-0 transition [--from:#3d76d1] [--to:#2756a280] group-aria-pressed:opacity-99">
-                            </div>
-                            <picture
-                                    class="absolute -z-1 rounded-inherit -mr-2.5 pointer-events-none saturate-50 transition group-hover:saturate-100 group-aria-pressed:saturate-100 inset-0">
-                                <source srcset="../../static/cases_files/jackrun-preview-sm.avif 1x"
-                                        type="image/avif">
-                                <source srcset="../../static/cases_files/jackrun-preview-sm.webp 1x"
-                                        type="image/webp">
-                                <img
-                                        src="../../static/cases_files/jackrun-preview-sm.webp" alt="Jackrun"
-                                        class="w-full h-full object-contain object-right" width="159" height="69">
-                            </picture>
-                            <div class="relative mb-0.5 text-tiny font-bold leading-none text-[#e6eeff]" translate="no">
-                                Jackrun
-                            </div>
-                            <span class="tabular-nums relative">0.41₽</span>
-                        </a></li>
-                        <li class="odd:max-md:last:col-span-full relative"><a
-                                class="group relative z-1 flex h-18 pt-0.5 flex-col justify-center overflow-hidden  rounded-xl bg-gradient-var-to-r pl-4.5 text-sm uppercase text-[#a6adcd] transition [--from:#212842] [--to:#2d3656] aria-pressed:text-[#c2dcfc]"
-                                aria-pressed="false" href="https://csgoad.run/rollrun">
-                            <div
-                                    class="absolute inset-0 -z-1 bg-gradient-var opacity-0 transition [--from:#3d76d1] [--to:#2756a280] group-aria-pressed:opacity-99">
-                            </div>
-                            <picture
-                                    class="absolute -z-1 rounded-inherit -mr-2.5 pointer-events-none saturate-50 transition group-hover:saturate-100 group-aria-pressed:saturate-100 inset-0">
-                                <source srcset="../../static/cases_files/roolrun-preview-sm.avif 1x"
-                                        type="image/avif">
-                                <source srcset="../../static/cases_files/rollrun-preview-sm.webp 1x"
-                                        type="image/webp">
-                                <img
-                                        src="../../static/cases_files/rollrun-preview-sm.webp" alt="Rollrun"
-                                        class="w-full h-full object-contain object-right" width="159" height="69">
-                            </picture>
-                            <div class="relative mb-0.5 text-tiny font-bold leading-none text-[#e6eeff]" translate="no">
-                                Rollrun
-                            </div>
-                            <span class="tabular-nums relative">5.23₽</span>
-                        </a></li>
-                        <li class="odd:max-md:last:col-span-full relative"><a
-                                class="group relative z-1 flex h-18 pt-0.5 flex-col justify-center overflow-hidden  rounded-xl bg-gradient-var-to-r pl-4.5 text-sm uppercase text-[#a6adcd] transition [--from:#212842] [--to:#2d3656] aria-pressed:text-[#c2dcfc]"
-                                aria-pressed="true" href="https://csgoad.run/cases">
-                            <div
-                                    class="absolute inset-0 -z-1 bg-gradient-var opacity-0 transition [--from:#3d76d1] [--to:#2756a280] group-aria-pressed:opacity-99">
-                            </div>
-                            <picture
-                                    class="absolute -z-1 rounded-inherit -mr-2.5 pointer-events-none saturate-50 transition group-hover:saturate-100 group-aria-pressed:saturate-100 inset-0">
-                                <source srcset="../../static/cases_files/cases-preview-sm.avif 1x"
-                                        type="image/avif">
-                                <source srcset="../../static/cases_files/cases-preview-sm.webp 1x"
-                                        type="image/webp">
-                                <img
-                                        src="../../static/cases_files/cases-preview-sm.webp" alt="Кейсы"
-                                        class="w-full h-full object-contain object-right" width="159" height="69">
-                            </picture>
-                            <div class="relative mb-0.5 text-tiny font-bold leading-none text-[#e6eeff]" translate="no">
-                                Кейсы
-                            </div>
-                        </a></li>
-                        <li class="odd:max-md:last:col-span-full relative"><a
-                                class="group relative z-1 flex h-18 pt-0.5 flex-col justify-center overflow-hidden  rounded-xl bg-gradient-var-to-r pl-4.5 text-sm uppercase text-[#a6adcd] transition [--from:#212842] [--to:#2d3656] aria-pressed:text-[#c2dcfc]"
-                                aria-pressed="false" href="https://csgoad.run/cases-battle">
-                            <div
-                                    class="absolute inset-0 -z-1 bg-gradient-var opacity-0 transition [--from:#3d76d1] [--to:#2756a280] group-aria-pressed:opacity-99">
-                            </div>
-                            <picture
-                                    class="absolute -z-1 rounded-inherit -mr-2.5 pointer-events-none saturate-50 transition group-hover:saturate-100 group-aria-pressed:saturate-100 inset-0">
-                                <source srcset="../../static/cases_files/botgame-preview-sm.avif 1x"
-                                        type="image/avif">
-                                <source srcset="../../static/cases_files/botgame-preview-sm.webp 1x"
-                                        type="image/webp">
-                                <img
-                                        src="../../static/cases_files/botgame-preview-sm.webp" alt="Кейсбатл"
-                                        class="w-full h-full object-contain object-right" width="159" height="69">
-                            </picture>
-                            <div class="relative mb-0.5 text-tiny font-bold leading-none text-[#e6eeff]" translate="no">
-                                Кейсбатл
-                            </div>
-                        </a></li>
-                    </ul>
                     <section class="pt-8 lg:pt-12 pb-1 max-lg:overflow-hidden">
 
                         {% load static %}
