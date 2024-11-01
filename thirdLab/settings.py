@@ -13,8 +13,7 @@ ALLOWED_HOSTS = []
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    r'templates\csgorun\No Money_files',
-    ]
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,13 +25,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'csgorun',
-
-    'social_django',
 ]
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.open_id.OpenIdAuth',
-    'social_core.backends.steam.SteamOpenId',
     'django.contrib.auth.backends.ModelBackend',
 )
 SITE_ID = 1

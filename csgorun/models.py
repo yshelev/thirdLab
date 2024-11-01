@@ -40,13 +40,13 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """
-	fields:\n
-	name, path_to_icon, balance, items\n
-	methods:\n
-	add_balance,
-	substract_balance,
-	add_item
-	"""
+    fields:\n
+    name, path_to_icon, balance, items\n
+    methods:\n
+    add_balance,
+    substract_balance,
+    add_item
+    """
     email = models.CharField(max_length=255)
     steamid = models.CharField(max_length=17, unique=True)
     personalname = models.CharField(max_length=255)
@@ -90,12 +90,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def add_balance(self, additive: int | float = 0) -> bool:
         """
-		Raise value error if additive is negative.\n
-		return True if additive is added else return False.
+        Raise value error if additive is negative.\n
+        return True if additive is added else return False.
 
-		:param additive:
-		:return:
-		"""
+        :param additive:
+        :return:
+        """
         if additive < 0:
             try:
                 raise ValueError("Additive must be greater than zero")
@@ -108,13 +108,13 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def subtract_balance(self, subtractive: int | float = 0) -> bool:
         """
-		Raise value error if subtractive is negative\n
-		Raise value error if balance is negative or equal to zero.\n
-		return True if subtractive is subtracted else return False.
+        Raise value error if subtractive is negative\n
+        Raise value error if balance is negative or equal to zero.\n
+        return True if subtractive is subtracted else return False.
 
-		:param subtractive:
-		:return:
-		"""
+        :param subtractive:
+        :return:
+        """
         if subtractive < 0:
             try:
                 raise ValueError("Subtractive must be greater than zero")
@@ -163,20 +163,20 @@ class Transaction(models.Model):
     transaction_type: str = models.CharField(max_length=3, choices=TRANSACTION_TYPES_CHOICE, default=SUBTRACT_TYPE)
 
 class Rarity(models.Model):
-	UNCOMMON: int = 1
-	RARE: int = 3
-	LEGENDARY: int = 5
-	ANCIENT: int = 7
+    UNCOMMON: int = 1
+    RARE: int = 3
+    LEGENDARY: int = 5
+    ANCIENT: int = 7
 
-	RARITY_CHOICES = {
-		UNCOMMON: "uncommon",
-		RARE: "rare",
-		LEGENDARY: "legendary",
-		ANCIENT: "ancient",
-	}
+    RARITY_CHOICES = {
+        UNCOMMON: "uncommon",
+        RARE: "rare",
+        LEGENDARY: "legendary",
+        ANCIENT: "ancient",
+    }
 
-	index: int = models.IntegerField(choices=RARITY_CHOICES, unique=True)
-	name: str = models.CharField(max_length=50, unique=True, blank=True, null=True)
+    index: int = models.IntegerField(choices=RARITY_CHOICES, unique=True)
+    name: str = models.CharField(max_length=50, unique=True, blank=True, null=True)
 
 
 class Quality(models.Model):
@@ -203,13 +203,13 @@ class Quality(models.Model):
         return self.name
 
 class Skin(models.Model):
-	is_statTrek: bool = models.BooleanField(default=False)
-	is_souvenir: bool = models.BooleanField(default=False)
-	quality: Quality = models.ForeignKey(Quality, on_delete=models.CASCADE, default=0)
-	name: str = models.CharField(max_length=50)
-	gun_name: str = models.CharField(max_length=50, default="_")
-	path_to_icon: str = models.CharField(max_length=500)
-	rarity: Rarity = models.ForeignKey(Rarity, on_delete=models.CASCADE, null=True, blank=True)
-	cost: int = models.IntegerField()
-	class Meta:
-		pass
+    is_statTrek: bool = models.BooleanField(default=False)
+    is_souvenir: bool = models.BooleanField(default=False)
+    quality: Quality = models.ForeignKey(Quality, on_delete=models.CASCADE, default=0)
+    name: str = models.CharField(max_length=50)
+    gun_name: str = models.CharField(max_length=50, default="_")
+    path_to_icon: str = models.CharField(max_length=500)
+    rarity: Rarity = models.ForeignKey(Rarity, on_delete=models.CASCADE, null=True, blank=True)
+    cost: int = models.IntegerField()
+    class Meta:
+        pass
