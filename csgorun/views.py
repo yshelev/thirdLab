@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.http import HttpRequest
 from .models import *
 
@@ -9,6 +9,7 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "csgorun/cases_cs_2.html", context={"cases": cases})
 
 def case(request: HttpRequest, name: str) -> HttpResponse:
+    print(name)
     case_ = Case.objects.get(name=name)
 
     skins = []
@@ -19,4 +20,10 @@ def case(request: HttpRequest, name: str) -> HttpResponse:
     skins.sort(key=lambda skin: skin.cost, reverse=True)
 
     return render(request, f'csgorun/case_{name}.html', {"skins": skins})
+
+def case_api(request: HttpRequest, name: str) -> JsonResponse:
+    case_ = Case.objects.get(name=name)
+    print(case_.pull)
+
+    return JsonResponse(case_.pull, safe=False)
 
