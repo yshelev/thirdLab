@@ -55,14 +55,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     avatarmedium = models.CharField(max_length=255)
     avatarfull = models.CharField(max_length=255)
 
-    balance: int = models.IntegerField(default=0)
-    items: list = models.JSONField(default=list)  # items_ids
-    password: str = models.CharField(max_length=500, default="1")
-    last_login: datetime.datetime = models.DateTimeField(default=datetime.datetime.now)
-    is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-
-
     USERNAME_FIELD = 'steamid'
     REQUIRED_FIELDS = []
 
@@ -71,12 +63,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         pass
 
+class SiteUser(models.Model):
+    steamUser: User = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    balance: int = models.IntegerField(default=0)
+    items: list = models.JSONField(default=list)  # items_ids
+    password: str = models.CharField(max_length=500, default="1")
+    last_login: datetime.datetime = models.DateTimeField(default=datetime.datetime.now)
+    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     def get_short_name(self):
-        return self.personalname
+        return self.steamUser.personalname
 
     def get_full_name(self):
-        return self.personalname
+        return self.steamUser.personalname
 
     def add_item(self, item_id):
         try:
@@ -131,8 +131,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return True
 
     def __repr__(self):
-        return f'User {self.personalname} with balance {self.balance}'
-
+        return f'User {self.steamUser.personalname} with balance {self.balance}'
 
 class Case(models.Model):
     name: str = models.CharField(max_length=50)
