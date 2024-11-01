@@ -55,6 +55,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     avatarmedium = models.CharField(max_length=255)
     avatarfull = models.CharField(max_length=255)
 
+    password: str = models.CharField(max_length=500, default="1")
+    last_login: datetime.datetime = models.DateTimeField(default=datetime.datetime.now)
+    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+
     USERNAME_FIELD = 'steamid'
     REQUIRED_FIELDS = []
 
@@ -67,10 +72,7 @@ class SiteUser(models.Model):
     steamUser: User = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     balance: int = models.IntegerField(default=0)
     items: list = models.JSONField(default=list)  # items_ids
-    password: str = models.CharField(max_length=500, default="1")
-    last_login: datetime.datetime = models.DateTimeField(default=datetime.datetime.now)
-    is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
+
 
     def get_short_name(self):
         return self.steamUser.personalname
