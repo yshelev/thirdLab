@@ -16,6 +16,7 @@ class UserManager(BaseUserManager):
             raise ValueError('The given steamid must be set')
         print(steamid, password)
         user = self.model(steamid=steamid, **extra_fields)
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
@@ -37,7 +38,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(models.Model):
+class User(AbstractBaseUser, PermissionsMixin):
     """
     fields:\n
     name, path_to_icon, balance, items\n
