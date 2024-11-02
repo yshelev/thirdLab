@@ -39,35 +39,42 @@
             <div class="w-full px-2.5 pt-16 lg:pt-0 lg:px-5 lg:pb-5 relative">
                 <header
                         class="flex fixed lg:relative top-0 inset-x-0 lg:inset-auto z-10  pl-4 pr-2 lg:px-0 items-center pb-2 pt-2 lg:py-5 ">
-                    <ul class="flex justify-end mr-1">
-                        <li><a href="https://vk.com/csgorun_net" aria-label="VK" title="VK" target="_blank"
-                               class="block p-1.5 text-[#dae2f5] hover:text-white  transition" rel="noreferrer">
-                            <div class="icon w-5.75" style="mask-image: url(&quot;/svg/vk.svg&quot;);"></div>
-                        </a></li>
-                        <li><a href="https://discord.gg/csgorun-759096787029327963" aria-label="Discord" title="Discord"
-                               target="_blank" class="block p-1.5 text-[#dae2f5] hover:text-white  transition"
-                               rel="noreferrer">
-                            <div class="icon w-5.75" style="mask-image: url(&quot;/svg/discord.svg&quot;);"></div>
-                        </a></li>
-                        <li><a href="https://t.me/runcsgo" aria-label="Telegram" title="Telegram" target="_blank"
-                               class="block p-1.5 text-[#dae2f5] hover:text-white  transition" rel="noreferrer">
-                            <div class="icon w-5.75" style="mask-image: url(&quot;/svg/telegram.svg&quot;);"></div>
-                        </a></li>
-                    </ul>
-                    <a href="login/steam">
+
+                {% if not user.is_authenticated %}
+                     <a href="login/steam">
                         <button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:"
                                 data-state="closed"
-                                class="btn btn--green h-11 shrink-0 gap-2.5 lg:gap-3 rounded pl-3.5 lg:pl-4.5 pr-3 lg:pr-3.5 text-tiny font-bold  uppercase lg:h-12.5">
-                            {% if user.is_authenticated %}
-                                Профиль
-                            {% else %}
+                                class="btn btn--green h-11 shrink-0 gap-3 lg:gap-3 rounded pl-3.5 lg:pl-4 pr-3 lg:pr-3.5 text-base font-bold  uppercase lg:h-12.5">
                                 Авторизация
-                            {% endif %}
 
-                            <div class="icon w-5.5 -mt-0.5 lg:-mt-1"
-                                 style="mask-image: url(&quot;/svg/lock.svg&quot;);"></div>
                         </button>
+
                     </a>
+
+                {% else %}
+                    <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
+                        <button type="button" class="flex items-center gap-2 font-medium text-[#ffc6b0] lg:mr-2.25 lg:gap-3 sm:font-semibold" translate="no">
+                            {{ user.siteuser.balance }}₽
+                        </button>
+                        <a class="block font-medium aspect-square h-fit shrink-0 ml-1 lg:ml-0 mr-0.5 w-8.5 lg:w-11.5" href="/profile">
+                            <img alt="{{user.personaname}}" src="{{ user.avatarmedium }}" width="46" height="46" loading="lazy" class="h-full w-full rounded border-none object-cover sm:rounded-lg">
+                        </a>
+                        <button type="button" class="btn btn--gold mr-0.5 w-8.5 gap-2.5 rounded text-tiny font-bold uppercase max-lg:aspect-square lg:h-11.5 lg:w-auto lg:pl-3 lg:pr-4">
+                            <div class="icon w-5 max-lg:hidden" style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
+                            <div class="icon w-3 lg:hidden" style="mask-image: url(&quot;/svg/plus.svg&quot;);"></div>
+                            <span class="max-lg:sr-only">Пополнить</span></button></div>
+                         <a href="{% url 'logout' %}">
+                             <button type="button" aria-haspopup="dialog" aria-expanded="false"
+                                     style="margin-left: 10px"
+                                     aria-controls="radix-:rg:"
+                                     data-state="closed"
+                                     class="btn btn--green h-11 shrink-0 gap-2.5 lg:gap-3 rounded pl-3.5 lg:pl-4.5 pr-3 lg:pr-3.5 text-tiny font-bold uppercase lg:h-12.5">
+                                 Выйти
+                             </button>
+                         </a>
+
+                {% endif %}
+
                 </header>
                 <div
                         class="mx-auto w-full  min-h-[calc(100svh-10rem)] lg:min-h-[calc(100vh-7rem)] flex flex-col lg:w-[--container-w] [&amp;:has([data-inventory-sticky]:not([inert]))]:pb-[--inventory-h]">

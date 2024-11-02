@@ -38,5 +38,7 @@ def case_api(request: HttpRequest, name: str) -> JsonResponse:
 
 def custom_logout(request):
     logout(request)
-    return redirect('/')
+    next_page = request.GET.get('next', '/')
+    return redirect(next_page)
+
 

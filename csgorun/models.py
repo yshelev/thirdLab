@@ -60,7 +60,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_anonymous = models.BooleanField(default=False)
-    is_authenticated = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'steamid'
@@ -78,9 +77,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.personaname
 
 class SiteUser(models.Model):
-    steamUser: User = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    steamUser: User = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, default=0)
     balance: int = models.IntegerField(default=0)
-    items: list = models.JSONField(default=list)  # items_ids
+    items: list = models.JSONField(default=list, blank=True)  # items_ids
 
     def add_item(self, item_id):
         try:
@@ -135,7 +134,7 @@ class SiteUser(models.Model):
         return True
 
     def __repr__(self):
-        return f'User {self.steamUser.personalname} with balance {self.balance}'
+        return f'User {self.steamUser.personaname} with balance {self.balance}'
 
 class Case(models.Model):
     name: str = models.CharField(max_length=50)
