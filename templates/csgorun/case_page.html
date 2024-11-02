@@ -40,8 +40,8 @@
                 <header class="flex fixed lg:relative top-0 inset-x-0 lg:inset-auto z-10 pl-4 pr-2 lg:px-0 items-center pb-2 pt-2 lg:py-5">
                     {% if not user.is_authenticated %}
                         <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
-                            <a href="/login/steam">
-                                <button type="button" aria-haspopup="dialog" aria-expanded="false"
+                            <a href="/login/steam/?next={% url 'case_page' name=case.name %}">
+                               <button type="button" aria-haspopup="dialog" aria-expanded="false"
                                         aria-controls="radix-:r54:"
                                         data-state="closed"
                                         class="btn btn--green h-11 shrink-0 gap-2.5 lg:gap-3 rounded pl-3.5 lg:pl-4.5 pr-3 lg:pr-3.5 text-tiny font-bold  uppercase lg:h-12.5">
@@ -49,7 +49,6 @@
                                     <div class="icon w-5.5 -mt-0.5 lg:-mt-1"
                                          style="mask-image: url('../../static/svg/lock.svg');"></div>
                                 </button>
-
                             </a>
                         </div>
 
@@ -86,8 +85,8 @@
                                 <span class="max-lg:sr-only">Выйти</span>
                             </button>
                         </a>
+                        </div>
                     {% endif %}
-                    </div>
                 </header>
                 <div class="mx-auto w-full min-h-[calc(100svh-10rem)] lg:min-h-[calc(100vh-7rem)] flex flex-col lg:w-[--container-w] [&amp;:has([data-inventory-sticky]:not([inert]))]:pb-[--inventory-h]">
                     <div class="relative z-1 flex items-center overflow-hidden -mt-4 py-4">
