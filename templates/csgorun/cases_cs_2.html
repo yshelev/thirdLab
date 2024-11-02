@@ -8,6 +8,7 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'index-f608fb18.css' %}">
     <link rel="canonical" href="https://csgoad.run/cases" data-react-helmet="true">
+    <title>TrashCases</title>
 
 
 </head>
@@ -40,40 +41,57 @@
                 <header
                         class="flex fixed lg:relative top-0 inset-x-0 lg:inset-auto z-10  pl-4 pr-2 lg:px-0 items-center pb-2 pt-2 lg:py-5 ">
 
-                {% if not user.is_authenticated %}
-                     <a href="login/steam">
-                        <button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:"
-                                data-state="closed"
-                                class="btn btn--green h-11 shrink-0 gap-3 lg:gap-3 rounded pl-3.5 lg:pl-4 pr-3 lg:pr-3.5 text-base font-bold  uppercase lg:h-12.5">
-                                Авторизация
+                    {% if not user.is_authenticated %}
+                        <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
+                            <a href="/login/steam">
+                                <button type="button" aria-haspopup="dialog" aria-expanded="false"
+                                        aria-controls="radix-:r54:"
+                                        data-state="closed"
+                                        class="btn btn--green h-11 shrink-0 gap-2.5 lg:gap-3 rounded pl-3.5 lg:pl-4.5 pr-3 lg:pr-3.5 text-tiny font-bold  uppercase lg:h-12.5">
+                                    Авторизация
+                                    <div class="icon w-5.5 -mt-0.5 lg:-mt-1"
+                                         style="mask-image: url('../../static/svg/lock.svg');"></div>
+                                </button>
 
-                        </button>
+                            </a>
+                        </div>
 
-                    </a>
+                    {% else %}
+                        <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
+                            <button type="button"
+                                    class="flex items-center gap-2 font-medium text-[#ffc6b0] lg:mr-2.25 lg:gap-3 sm:font-semibold"
+                                    translate="no">
+                                <div class="icon w-5.25" style="mask-image: url('../../static/svg/wallet.svg');"></div>
+                                {{ user.siteuser.balance }}₽
+                            </button>
+                            <a class="block font-medium aspect-square h-fit shrink-0 ml-1 lg:ml-0 mr-0.5 w-8.5 lg:w-11.5"
+                               href="/profile">
+                                <img alt="{{ user.personaname }}" src="{{ user.avatarmedium }}" width="46" height="46"
+                                     loading="lazy"
+                                     class="h-full w-full rounded border-none object-cover sm:rounded-lg">
+                            </a>
+                            <button type="button"
+                                    class="btn btn--gold mr-0.5 w-8.5 gap-2.5 rounded text-tiny font-bold uppercase max-lg:aspect-square lg:h-11.5 lg:w-auto lg:pl-3 lg:pr-4">
+                                <div class="icon w-5 max-lg:hidden"
+                                     style="mask-image: url('../../static/svg/add.svg');"></div>
+                                <div class="icon w-3 lg:hidden"
+                                     style="mask-image: url('../../static/svg/plus.svg');"></div>
+                                <span class="max-lg:sr-only">Пополнить</span></button>
+                            <a href="{% url 'logout' %}">
+                                <button type="button" aria-haspopup="dialog" aria-expanded="false"
+                                        aria-controls="radix-:rg:"
+                                        data-state="closed"
+                                        class="btn btn--green mr-0.5 w-8.5 gap-2.5 rounded text-tiny font-bold uppercase
+                                    max-lg:aspect-square lg:h-11.5 lg:w-auto lg:pl-3 lg:pr-4">
+                                    <div class="icon w-5 max-lg:hidden"
+                                         style="mask-image: url('../../static/svg/cross.svg');"></div>
+                                    <span class="max-lg:sr-only">Выйти</span>
 
-                {% else %}
-                    <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
-                        <button type="button" class="flex items-center gap-2 font-medium text-[#ffc6b0] lg:mr-2.25 lg:gap-3 sm:font-semibold" translate="no">
-                            {{ user.siteuser.balance }}₽
-                        </button>
-                        <a class="block font-medium aspect-square h-fit shrink-0 ml-1 lg:ml-0 mr-0.5 w-8.5 lg:w-11.5" href="/profile">
-                            <img alt="{{user.personaname}}" src="{{ user.avatarmedium }}" width="46" height="46" loading="lazy" class="h-full w-full rounded border-none object-cover sm:rounded-lg">
-                        </a>
-                        <button type="button" class="btn btn--gold mr-0.5 w-8.5 gap-2.5 rounded text-tiny font-bold uppercase max-lg:aspect-square lg:h-11.5 lg:w-auto lg:pl-3 lg:pr-4">
-                            <div class="icon w-5 max-lg:hidden" style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                            <div class="icon w-3 lg:hidden" style="mask-image: url(&quot;/svg/plus.svg&quot;);"></div>
-                            <span class="max-lg:sr-only">Пополнить</span></button></div>
-                         <a href="{% url 'logout' %}">
-                             <button type="button" aria-haspopup="dialog" aria-expanded="false"
-                                     style="margin-left: 10px"
-                                     aria-controls="radix-:rg:"
-                                     data-state="closed"
-                                     class="btn btn--green h-11 shrink-0 gap-2.5 lg:gap-3 rounded pl-3.5 lg:pl-4.5 pr-3 lg:pr-3.5 text-tiny font-bold uppercase lg:h-12.5">
-                                 Выйти
-                             </button>
-                         </a>
+                                </button>
+                            </a>
+                        </div>
 
-                {% endif %}
+                    {% endif %}
 
                 </header>
                 <div
