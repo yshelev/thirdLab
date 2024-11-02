@@ -143,7 +143,7 @@
                     <div class="bg-[#1e253d] gap-y-4 gap-x-2 py-4 md:py-0 md:h-25 flex flex-wrap justify-center sm:flex-nowrap sm:justify-between items-center rounded-3xl relative z-1">
                         <div class="md:mx-auto order-first w-full flex justify-center sm:contents">
                             <script src="../../static/No%20Money_files/script.js"></script>
-                            <button onclick="generate()" type="button" id="rotate-button"
+                            <button onclick="generate('{{ case.name }}')" type="button" id="rotate-button"
                                     class="btn btn--blue h-12.5 lg:h-14.5 gap-4 lg:gap-3 rounded-lg pl-4 sm:pl-5.5 pr-4 sm:pr-5 text-tiny font-bold uppercase justify-between lg:mt-0 md:min-w-53.5">
                                 <span>Открыть</span>
                                 <div class="text-sm lg:text-base flex items-center gap-2">{{ case.cost }}₽</div>
@@ -174,7 +174,7 @@
                                 rouletteContainer.style.transitionDuration = `${animationDuration * animationSpeed}ms`
                                 rouletteContainer.style.transitionTimingFunction = 'cubic-bezier(0.4, 0, 0.2, 1)'
 
-                                const itemWidth = Math.random() * 1000 + 5000
+                                const itemWidth = 10000
                                 rouletteContainer.style.transform = `translateX(-${itemWidth}px)`
                             }, 100)
 
