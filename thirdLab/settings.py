@@ -13,8 +13,7 @@ ALLOWED_HOSTS = []
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    r'templates\csgorun\No Money_files',
-    ]
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -25,9 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    'csgorun',
-
     'social_django',
+    'csgorun',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -37,6 +35,7 @@ AUTHENTICATION_BACKENDS = (
 )
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 SOCIAL_AUTH_STEAM_API_KEY = 'BCC74E0CB3E21FBA4383130F2D2E22AB'
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
 
