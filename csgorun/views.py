@@ -8,7 +8,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from .services import (
     get_cases_ordered_by_cost, get_case_by_name, get_skins_from_case_with_name_ordered_by_cost,
-    get_list_of_random_skins_from_case_with_name)
+    get_list_of_random_skins_from_case_with_name, get_random_skin_from_case_with_name, serialize_skin)
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -22,8 +22,8 @@ def case(request: HttpRequest, name: str) -> HttpResponse:
 
 def case_api(request: HttpRequest, name: str) -> JsonResponse:
     output_container = get_list_of_random_skins_from_case_with_name(name)
-    return JsonResponse(output_container, safe=False)
-
+    win_skin = serialize_skin(get_random_skin_from_case_with_name(name))
+    return JsonResponse({"container": output_container, "win_skin": win_skin}, safe=False)
 
 def custom_logout(request):
     logout(request)
