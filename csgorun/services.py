@@ -1,5 +1,6 @@
 import json
 import random
+from unittest import case
 
 from django.db.models import QuerySet
 
@@ -46,3 +47,24 @@ def get_random_skin_from_case_with_name(name: str):
 	case_ = get_case_by_name(name)
 	pull_ = case_.pull
 	return Skin.objects.get(id=random.choice(pull_))
+
+
+def check_if_user_can_open_case_with_name(user, case_name):
+	case_ = get_case_by_name(case_name)
+
+	if not user.id:
+		return False
+
+	if not user.siteuser:
+		return False
+
+	if user.siteuser.balance < case_.cost:
+		return False
+
+	return True
+
+def update_user_after_buy_case_with_name(user, case_name, win_skin):
+	case_ = get_case_by_name(case_name)
+	user.siteuser.balance -= case_.cost
+	user.siteuser.items.append(win_skin)
+	user.siteuser.save()

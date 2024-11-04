@@ -10,7 +10,7 @@ def create_payment(data):
 
     change = BalanceChange.objects.create(
         user_id=data['user_id'],
-        amount_value=300,
+        amount_value=data["total"],
         is_accepted=True,
     )
 

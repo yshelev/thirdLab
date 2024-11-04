@@ -7,7 +7,9 @@ from django.contrib.auth.decorators import login_required
 
 from .services import (
     get_cases_ordered_by_cost, get_case_by_name, get_skins_from_case_with_name_ordered_by_cost,
-    get_list_of_random_skins_from_case_with_name, get_random_skin_from_case_with_name, serialize_skin)
+    get_list_of_random_skins_from_case_with_name, get_random_skin_from_case_with_name, serialize_skin,
+    check_if_user_can_open_case_with_name, update_user_after_buy_case_with_name
+)
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -16,15 +18,28 @@ def index(request: HttpRequest) -> HttpResponse:
 @login_required
 def profile(request: HttpRequest) -> HttpResponse:
     return render(request, "csgorun/Инвентарь.html")
-def case(request: HttpRequest, name: str) -> HttpResponse:
-    case_ = get_case_by_name(name)
-    skins = get_skins_from_case_with_name_ordered_by_cost(name)
-    return render(request, f'csgorun/case_page.html', {"skins": skins, "case" : case_})
 
-def case_api(request: HttpRequest, name: str) -> JsonResponse:
-    output_container = get_list_of_random_skins_from_case_with_name(name)
-    win_skin = serialize_skin(get_random_skin_from_case_with_name(name))
-    return JsonResponse({"container": output_container, "win_skin": win_skin}, safe=False)
+def case(request: HttpRequest, name: str) -> HttpResponse:
+    context = {
+        "skins": get_skins_from_case_with_name_ordered_by_cost(name),
+        "case": get_case_by_name(name)
+    }
+    return render(request, f'csgorun/case_page.html', context)
+
+def open_case_api(request: HttpRequest, name: str) -> JsonResponse:
+    if not check_if_user_can_open_case_with_name(request.user, name):
+        return JsonResponse({"can_open": False, "container": [], "win_skin": None}, safe=False)
+    skin = get_random_skin_from_case_with_name(name)
+    user = request.user
+
+    update_user_after_buy_case_with_name(user, name, skin.id)
+    data = {
+        "can_open": True,
+        "new_user_balance": user.siteuser.balance,
+        "container": get_list_of_random_skins_from_case_with_name(name),
+        "win_skin": serialize_skin(skin)
+    }
+    return JsonResponse(data, safe=False)
 
 def custom_logout(request):
     logout(request)

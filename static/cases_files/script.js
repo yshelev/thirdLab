@@ -1,5 +1,5 @@
 function generate(name) {
-    fetch('/case_api/' + name.toString(), {
+    fetch('/open_case_api/' + name.toString(), {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json'
@@ -7,7 +7,17 @@ function generate(name) {
 })
 .then(response => response.json())
 .then(function (data) {
+    if (!data["can_open"]) {
+        return //TODO do some things here
+    }
     const rouletteContainer = document.getElementById('roulette-container')
+    const rotateButton = document.getElementById('rotate-button')
+    const balanceContainer = document.getElementById("balance-container")
+    const items = rouletteContainer.children
+
+    let isRotating = false
+    let animationDuration = 5000
+    let animationSpeed = 0.5
     let container = data["container"]
     let win_skin = data["win_skin"]
 
@@ -37,8 +47,36 @@ function generate(name) {
         </div>
     </div>
     `
+
         }
     )
+    balanceContainer.innerHTML = `
+        <div class="icon w-5.25" style="mask-image: url('../../static/svg/wallet.svg');"></div>
+        ${data["new_user_balance"] + "₽"}
+    `
+
+    if (isRotating) return
+    isRotating = true
+
+    rouletteContainer.style.transitionDuration = '0s'
+    rouletteContainer.style.transform = 'translateX(0)'
+    setTimeout(() => {
+        for (let i = 0; i < 5; i++) {
+            const clone = items[i].cloneNode(true)
+            rouletteContainer.appendChild(clone)
+        }
+
+        rouletteContainer.style.transitionDuration = `${animationDuration * animationSpeed}ms`
+        rouletteContainer.style.transitionTimingFunction = 'cubic-bezier(0.4, 0, 0.2, 1)'
+
+        const itemWidth = 10000
+        rouletteContainer.style.transform = `translateX(-${itemWidth}px)`
+    }, 100)
+
+    setTimeout(() => {
+        isRotating = false
+        rouletteContainer.style.transitionDuration = '0s'
+    }, animationDuration * animationSpeed)
 })
 .catch(error => {
     console.error('Ошибка:', error);

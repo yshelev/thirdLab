@@ -55,6 +55,7 @@
                     {% else %}
                         <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
                             <button type="button"
+                                    id="balance-container"
                                     class="flex items-center gap-2 font-medium text-[#ffc6b0] lg:mr-2.25 lg:gap-3 sm:font-semibold"
                                     translate="no">
                                 <div class="icon w-5.25" style="mask-image: url('../../static/svg/wallet.svg');"></div>
@@ -66,7 +67,7 @@
                                      loading="lazy"
                                      class="h-full w-full rounded border-none object-cover sm:rounded-lg">
                             </a>
-                            <a href="{% url 'yoomoney:create_payment' total=1 %}">
+                            <a href="{% url 'yoomoney:create_payment' total=100 %}">
                                 <button type="submit"
                                         class="btn btn--gold mr-0.5 w-8.5 gap-2.5 rounded text-tiny font-bold uppercase max-lg:aspect-square lg:h-11.5 lg:w-auto lg:pl-3 lg:pr-4">
                                     <div class="icon w-5 max-lg:hidden"
@@ -145,7 +146,7 @@
                     </div>
                     <div class="bg-[#1e253d] gap-y-4 gap-x-2 py-4 md:py-0 md:h-25 flex flex-wrap justify-center sm:flex-nowrap sm:justify-between items-center rounded-3xl relative z-1">
                         <div class="md:mx-auto order-first w-full flex justify-center sm:contents">
-                            <script src="../../static/No%20Money_files/script.js"></script>
+                            <script src="../../static/cases_files/script.js"></script>
                             <button onclick="generate('{{ case.name }}')" type="button" id="rotate-button"
                                     class="btn btn--blue h-12.5 lg:h-14.5 gap-4 lg:gap-3 rounded-lg pl-4 sm:pl-5.5 pr-4 sm:pr-5 text-tiny font-bold uppercase justify-between lg:mt-0 md:min-w-53.5">
                                 <span>Открыть</span>
@@ -153,41 +154,6 @@
                             </button>
                         </div>
                     </div>
-                    <script>
-                        const rotateButton = document.getElementById('rotate-button')
-                        const rouletteContainer = document.getElementById('roulette-container')
-                        const items = rouletteContainer.children
-
-                        let isRotating = false
-                        let animationDuration = 5000
-                        let animationSpeed = 0.5
-
-                        rotateButton.addEventListener('click', () => {
-                            if (isRotating) return
-                            isRotating = true
-
-                            rouletteContainer.style.transitionDuration = '0s'
-                            rouletteContainer.style.transform = 'translateX(0)'
-                            setTimeout(() => {
-                                for (let i = 0; i < 5; i++) {
-                                    const clone = items[i].cloneNode(true)
-                                    rouletteContainer.appendChild(clone)
-                                }
-
-                                rouletteContainer.style.transitionDuration = `${animationDuration * animationSpeed}ms`
-                                rouletteContainer.style.transitionTimingFunction = 'cubic-bezier(0.4, 0, 0.2, 1)'
-
-                                const itemWidth = 10000
-                                rouletteContainer.style.transform = `translateX(-${itemWidth}px)`
-                            }, 100)
-
-                            setTimeout(() => {
-                                isRotating = false
-                                rouletteContainer.style.transitionDuration = '0s'
-                            }, animationDuration * animationSpeed)
-                        })
-                    </script>
-
                     <section class="pt-4 lg:pt-6">
                         <header class="section-header justify-center px-0 mb-4">
                             <h2 class="title z-3 relative">Содержимое кейса</h2>
