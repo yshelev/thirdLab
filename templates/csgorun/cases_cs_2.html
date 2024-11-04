@@ -70,13 +70,15 @@
                                      loading="lazy"
                                      class="h-full w-full rounded border-none object-cover sm:rounded-lg">
                             </a>
-                            <button type="button"
-                                    class="btn btn--gold mr-0.5 w-8.5 gap-2.5 rounded text-tiny font-bold uppercase max-lg:aspect-square lg:h-11.5 lg:w-auto lg:pl-3 lg:pr-4">
-                                <div class="icon w-5 max-lg:hidden"
-                                     style="mask-image: url('../../static/svg/add.svg');"></div>
-                                <div class="icon w-3 lg:hidden"
-                                     style="mask-image: url('../../static/svg/plus.svg');"></div>
-                                <span class="max-lg:sr-only">Пополнить</span></button>
+                            <a href="{% url 'yoomoney:create_payment' total=1 %}">
+                                <button type="button"
+                                        class="btn btn--gold mr-0.5 w-8.5 gap-2.5 rounded text-tiny font-bold uppercase max-lg:aspect-square lg:h-11.5 lg:w-auto lg:pl-3 lg:pr-4">
+                                    <div class="icon w-5 max-lg:hidden"
+                                         style="mask-image: url('../../static/svg/add.svg');"></div>
+                                    <div class="icon w-3 lg:hidden"
+                                         style="mask-image: url('../../static/svg/plus.svg');"></div>
+                                    <span class="max-lg:sr-only">Пополнить</span></button>
+                            </a>
                             <a href="{% url 'csgorun:logout' %}">
                                 <button type="button" aria-haspopup="dialog" aria-expanded="false"
                                         aria-controls="radix-:rg:"
