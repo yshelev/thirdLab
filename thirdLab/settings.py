@@ -1,10 +1,11 @@
 from pathlib import Path
 import os
+from .config import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = 'django-insecure-hiv%coo=76+b^7_f5mu_(b)j*n7#%gecx8hh)i*@4&$%zy+7_s'
+SECRET_KEY = config["django_secret_key"]
 
 DEBUG = True
 
@@ -26,6 +27,7 @@ INSTALLED_APPS = [
 
     'social_django',
     'csgorun',
+    'yoomoney'
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -36,7 +38,7 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-SOCIAL_AUTH_STEAM_API_KEY = 'BCC74E0CB3E21FBA4383130F2D2E22AB'
+SOCIAL_AUTH_STEAM_API_KEY = config["steam_api_key"]
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
 
 AUTH_USER_MODEL = 'csgorun.User'
@@ -103,7 +105,7 @@ WSGI_APPLICATION = 'thirdLab.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / config["database_file"],
     }
 }
 
