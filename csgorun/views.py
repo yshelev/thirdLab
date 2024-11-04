@@ -13,6 +13,8 @@ def index(request: HttpRequest) -> HttpResponse:
     cases = get_cases_ordered_by_cost()
     return render(request, "csgorun/cases_cs_2.html", context={"cases": cases})
 
+def profile(request: HttpRequest) -> HttpResponse:
+    return render(request, "csgorun/Инвентарь.html")
 def case(request: HttpRequest, name: str) -> HttpResponse:
     case_ = get_case_by_name(name)
     skins = get_skins_from_case_with_name_ordered_by_cost(name)
