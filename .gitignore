@@ -7,4 +7,4 @@ db.sqlite3
 .idea
 csgorun/migrations/
 yoomoney/migrations/
-yoomoney/config.py
+*/config.py
