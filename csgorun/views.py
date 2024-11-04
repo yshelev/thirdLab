@@ -3,6 +3,7 @@ from django.http import HttpRequest
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 from .services import (
     get_cases_ordered_by_cost, get_case_by_name, get_skins_from_case_with_name_ordered_by_cost,
@@ -12,7 +13,7 @@ from .services import (
 def index(request: HttpRequest) -> HttpResponse:
     cases = get_cases_ordered_by_cost()
     return render(request, "csgorun/cases_cs_2.html", context={"cases": cases})
-
+@login_required
 def profile(request: HttpRequest) -> HttpResponse:
     return render(request, "csgorun/Инвентарь.html")
 def case(request: HttpRequest, name: str) -> HttpResponse:
