@@ -1,11 +1,9 @@
-import random
-
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-from django.http import HttpRequest
-from .models import *
 from django.contrib.auth import logout
+from django.http import HttpRequest
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
+from django.shortcuts import render
+
 from .services import (
     get_cases_ordered_by_cost, get_case_by_name, get_skins_from_case_with_name_ordered_by_cost,
     get_list_of_random_skins_from_case_with_name, get_random_skin_from_case_with_name, serialize_skin)
