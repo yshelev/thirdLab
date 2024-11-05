@@ -4,7 +4,7 @@ from unittest import case
 
 from django.db.models import QuerySet
 
-from .models import Case, Skin
+from .models import Case, Skin, User
 from .serializers import SkinSerializer
 
 
@@ -13,6 +13,9 @@ def get_cases_ordered_by_cost() -> QuerySet:
 
 def get_case_by_name(name: str) -> Case:
 	return Case.objects.get(name=name)
+
+def get_user_by_id(id_: int) -> Case:
+	return User.objects.get(id=id_)
 
 def get_skin_by_id(id_: int) -> Skin:
 	return Skin.objects.get(id=id_)
@@ -25,6 +28,14 @@ def get_skins_from_case_with_name_ordered_by_cost(name: str) -> list[Skin]:
 		skins.append(Skin.objects.get(id=skin_id))
 
 	skins.sort(key=lambda skin: skin.cost, reverse=True)
+
+	return skins
+
+def get_skins_from_user_with_id(id_: int) -> list[Skin]:
+	user_ = get_user_by_id(id_)
+	skins = []
+	for skin_id in user_.siteuser.items:
+		skins.append(Skin.objects.get(id=skin_id))
 
 	return skins
 
