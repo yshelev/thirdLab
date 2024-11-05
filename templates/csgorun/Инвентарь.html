@@ -132,25 +132,26 @@
                             <ul class="grid grow grid-cols-3 place-content-start gap-1.5 overflow-y-auto px-2.5 py-2.5 [--scrollbar-mb:1.25rem] [--scrollbar-mt:1.25rem] sm:grid-fill-26 lg:grid-cols-6 lg:grid-rows-2  lg:py-5">
                                 {% for skin in skins %}
                                     <div>
-                                        <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
+                                        <div class="drop-placehoder relative rounded overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded, bg-gradient-var pb-3 text-left text-[--color]"
+                                             data-item-color="{{ skin.rarity.index }}">
                                             <button type="button"
-                                                    class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                <img src="{% static skin.path_to_icon %}" width="175"
-                                                     height="175" alt=""/>
-                                                <div style = "color: lightgray; font-size: small">
-                                                    {{ skin.name }}
-                                                </div>
-                                                <div style = "color: lightgray; font-size: small">
-                                                    {{ skin.cost }}₽
-
-                                                </div>
-                                                <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                     style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
+                                                    class="btn group  relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
+                                                <img src="{% static skin.path_to_icon %}"
+                                                 class="m-auto aspect-square object-contain w-[80%] sm:w-[80%]"
+                                                 width="175" height="175" alt=""/>
                                             </button>
-                                            <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                            <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                            <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
+                                            <div class="absolute inset-x-1.5 z-1 top-2.5 flex items-center justify-between lg:inset-x-2.5">
+                                                <div class="bg-color-mix-20 px-1.5 lg:px-2 h-5 lg:h-6 flex items-center justify-center rounded-sm uppercase text-[0.6rem] lg:text-nano font-bold">{{ skin.quality.name }}</div>
+                                                <div class="pr-0.5 sm:pr-1 md:pr-2 text-tiny tiny:text-sm font-bold ml-auto text-[#ffc6b0]">{{ skin.cost }}₽</div>
+                                            </div>
+                                            <div class="absolute inset-x-2.5 bottom-5 leading-tight lg:inset-x-4.5 lg:bottom-5">
+                                                <div class="text-white">
+                                                    {% if skin.is_statTrak %}StatTrak{% endif %}{{ skin.gun_name }}
+                                                </div>
+                                                <div>{{ skin.name }}</div>
+                                            </div>
                                         </div>
+
                                     </div>
                                 {% endfor %}
                             </ul>
