@@ -21,7 +21,7 @@ Creating a site similar to csgorun, with cases
 
 ## Authors
 
-- [Shelevoi Yaroslav](https://github.com/yshelev) - models layer
-- [Pirkov Vasiliy](https://github.com/eMD0gG) - view layer
-- [Vongai Andrei](https://github.com/abbeswrld) - template layer
+- [Shelevoi Yaroslav](https://github.com/yshelev)
+- [Pirkov Vasiliy](https://github.com/eMD0gG)
+- [Vongai Andrei](https://github.com/abbeswrld)
 
