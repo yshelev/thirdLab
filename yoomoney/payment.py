@@ -33,8 +33,8 @@ def create_payment(data):
             'table_id': change.id,
             'user_id': data['user_id'],
         },
-        'status': "waiting_for_capture",
-        'capture': False,
+        # 'status': "waiting_for_capture",
+        'capture': True,
         'refundable': False,
         'description': 'Оплата на сумму ' + str(data['total']),
     }, idempotency_key=idempotency_key)
