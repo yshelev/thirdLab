@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .services import (
     get_cases_ordered_by_cost, get_case_by_name, get_skins_from_case_with_name_ordered_by_cost,
     get_list_of_random_skins_from_case_with_name, get_random_skin_from_case_with_name, serialize_skin,
-    check_if_user_can_open_case_with_name, update_user_after_buy_case_with_name
+    check_if_user_can_open_case_with_name, update_user_after_buy_case_with_name, get_skins_from_user_with_id
 )
 
 
@@ -17,7 +17,10 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "csgorun/cases_cs_2.html", context={"cases": cases})
 @login_required
 def profile(request: HttpRequest) -> HttpResponse:
-    return render(request, "csgorun/Инвентарь.html")
+    context = {
+        "skins": get_skins_from_user_with_id(request.user.id),
+    }
+    return render(request, "csgorun/Инвентарь.html", context=context)
 
 def case(request: HttpRequest, name: str) -> HttpResponse:
     context = {

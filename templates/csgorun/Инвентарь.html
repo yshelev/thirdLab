@@ -4,8 +4,9 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8"/>
     {% load static %}
-
+    <title>Инвентарь</title>
     <link rel="stylesheet" href="{% static 'Инвентарь_files/inventory.css' %}">
+    <link rel="icon" href="{% static 'icon.png' %}">
 
 </head>
 <body style="">
@@ -37,338 +38,144 @@
                 <header class="flex fixed lg:relative top-0 inset-x-0 lg:inset-auto z-10 pl-4 pr-2 lg:px-0 items-center pb-2 pt-2 lg:py-5">
                     <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
                         {% if not user.is_authenticated %}
-                        <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
-                            <a href="/login/steam">
-                                <button type="button" aria-haspopup="dialog" aria-expanded="false"
-                                        aria-controls="radix-:r54:"
-                                        data-state="closed"
-                                        class="btn btn--green h-11 shrink-0 gap-2.5 lg:gap-3 rounded pl-3.5 lg:pl-4.5 pr-3 lg:pr-3.5 text-tiny font-bold  uppercase lg:h-12.5">
-                                    Авторизация
-                                    <div class="icon w-5.5 -mt-0.5 lg:-mt-1"
-                                         style="mask-image: url('../../static/svg/lock.svg');"></div>
-                                </button>
+                            <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
+                                <a href="/login/steam">
+                                    <button type="button" aria-haspopup="dialog" aria-expanded="false"
+                                            aria-controls="radix-:r54:"
+                                            data-state="closed"
+                                            class="btn btn--green h-11 shrink-0 gap-2.5 lg:gap-3 rounded pl-3.5 lg:pl-4.5 pr-3 lg:pr-3.5 text-tiny font-bold  uppercase lg:h-12.5">
+                                        Авторизация
+                                        <div class="icon w-5.5 -mt-0.5 lg:-mt-1"
+                                             style="mask-image: url('../../static/svg/lock.svg');"></div>
+                                    </button>
 
-                            </a>
-                        </div>
+                                </a>
+                            </div>
 
-                    {% else %}
-                        <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
-                            <button type="button"
-                                    class="flex items-center gap-2 font-medium text-[#ffc6b0] lg:mr-2.25 lg:gap-3 sm:font-semibold"
-                                    translate="no">
-                                <div class="icon w-5.25" style="mask-image: url('../../static/svg/wallet.svg');"></div>
-                                {{ user.siteuser.balance }}₽
-                            </button>
-                            <a class="block font-medium aspect-square h-fit shrink-0 ml-1 lg:ml-0 mr-0.5 w-8.5 lg:w-11.5"
-                               href="/profile">
-                                <img alt="{{ user.personaname }}" src="{{ user.avatarmedium }}" width="46" height="46"
-                                     loading="lazy"
-                                     class="h-full w-full rounded border-none object-cover sm:rounded-lg">
-                            </a>
-                            <a href="{% url 'yoomoney:create_payment' total=1 %}">
+                        {% else %}
+                            <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
                                 <button type="button"
-                                        class="btn btn--gold mr-0.5 w-8.5 gap-2.5 rounded text-tiny font-bold uppercase max-lg:aspect-square lg:h-11.5 lg:w-auto lg:pl-3 lg:pr-4">
-                                    <div class="icon w-5 max-lg:hidden"
-                                         style="mask-image: url('../../static/svg/add.svg');"></div>
-                                    <div class="icon w-3 lg:hidden"
-                                         style="mask-image: url('../../static/svg/plus.svg');"></div>
-                                    <span class="max-lg:sr-only">Пополнить</span></button>
-                            </a>
-                            <a href="{% url 'csgorun:logout' %}">
-                                <button type="button" aria-haspopup="dialog" aria-expanded="false"
-                                        aria-controls="radix-:rg:"
-                                        data-state="closed"
-                                        class="btn btn--green mr-0.5 w-8.5 gap-2.5 rounded text-tiny font-bold uppercase
-                                    max-lg:aspect-square lg:h-11.5 lg:w-auto lg:pl-3 lg:pr-4">
-                                    <div class="icon w-5 max-lg:hidden"
-                                         style="mask-image: url('../../static/svg/cross.svg');"></div>
-                                    <span class="max-lg:sr-only">Выйти</span>
-
+                                        class="flex items-center gap-2 font-medium text-[#ffc6b0] lg:mr-2.25 lg:gap-3 sm:font-semibold"
+                                        translate="no">
+                                    <div class="icon w-5.25"
+                                         style="mask-image: url('../../static/svg/wallet.svg');"></div>
+                                    {{ user.siteuser.balance }}₽
                                 </button>
-                            </a>
-                        </div>
+                                <a class="block font-medium aspect-square h-fit shrink-0 ml-1 lg:ml-0 mr-0.5 w-8.5 lg:w-11.5"
+                                   href="/profile">
+                                    <img alt="{{ user.personaname }}" src="{{ user.avatarmedium }}" width="46"
+                                         height="46"
+                                         loading="lazy"
+                                         class="h-full w-full rounded border-none object-cover sm:rounded-lg">
+                                </a>
+                                <a href="{% url 'yoomoney:create_payment' total=1 %}">
+                                    <button type="button"
+                                            class="btn btn--gold mr-0.5 w-8.5 gap-2.5 rounded text-tiny font-bold uppercase max-lg:aspect-square lg:h-11.5 lg:w-auto lg:pl-3 lg:pr-4">
+                                        <div class="icon w-5 max-lg:hidden"
+                                             style="mask-image: url('../../static/svg/add.svg');"></div>
+                                        <div class="icon w-3 lg:hidden"
+                                             style="mask-image: url('../../static/svg/plus.svg');"></div>
+                                        <span class="max-lg:sr-only">Пополнить</span></button>
+                                </a>
+                                <a href="{% url 'csgorun:logout' %}">
+                                    <button type="button" aria-haspopup="dialog" aria-expanded="false"
+                                            aria-controls="radix-:rg:"
+                                            data-state="closed"
+                                            class="btn btn--green mr-0.5 w-8.5 gap-2.5 rounded text-tiny font-bold uppercase
+                                    max-lg:aspect-square lg:h-11.5 lg:w-auto lg:pl-3 lg:pr-4">
+                                        <div class="icon w-5 max-lg:hidden"
+                                             style="mask-image: url('../../static/svg/cross.svg');"></div>
+                                        <span class="max-lg:sr-only">Выйти</span>
 
-                    {% endif %}
+                                    </button>
+                                </a>
+                            </div>
+
+                        {% endif %}
 
                     </div>
                 </header>
-                        <div class="relative z-30 contents lg:block">
-                            <section data-inventory=""
-                                     class="flex h-full max-lg:h-[25rem] relative flex-col lg:flex-row bg-[#1c233a] lg:bg-[#1c233a] px-2.5 py-3.25 lg:min-h-0 lg:gap-5 rounded-3xl lg:p-5 [[data-inventory-sticky]_&amp;]:rounded-b-none transition-shadow [[data-inventory-sticky]:not([inert])_&amp;]:[box-shadow:0_-1rem_2rem_1rem_#161b2e] lg:h-[70rem]">
-                                <div class="relative contents w-full shrink-0 flex-wrap lg:flex lg:w-[16.875rem]">
-                                    <h2 class="title mb-2 lg:mb-3 w-full flex items-center justify-between gap-2 pl-2 pr-11 lg:pr-0">
-                                        Инвентарь</h2>
-                                    <div class="grid grow gap-2 mb-auto mt-1 grid-cols-1">
-                                        <div class="flex rounded border border-dashed border-[#2d3653] bg-[#232c48]/50 max-sm:text-sm px-3 sm:px-4 font-bold uppercase sm:gap-0.5 order-first text-[#a2feff] h-12.5 flex-row-reverse items-center justify-between">
-                                            0
-                                            <div class="text-nano font-medium text-[#a6adcd]">Выбрано скинов</div>
-                                        </div>
-                                        <div class="flex rounded border border-dashed border-[#2d3653] bg-[#232c48]/50 max-sm:text-sm px-3 sm:px-4 font-bold uppercase sm:gap-0.5 order-2 text-[#ffc6b0] h-13 flex-col justify-center pr-2 sm:h-15">
-                                            {{ user.siteuser.balance }}₽
-                                            <div class="text-nano font-medium text-[#a6adcd]">Баланс аккаунта</div>
-                                        </div>
-                                        <div class="flex rounded border border-dashed border-[#2d3653] bg-[#232c48]/50 max-sm:text-sm px-3 sm:px-4 font-bold uppercase sm:gap-0.5 text-[#a2feff] h-13 flex-col justify-center pr-2 sm:h-15">
-                                            0.00$
-                                            <div class="text-nano font-medium text-[#a6adcd]">Выбрано скинов в
-                                                инвентаре
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="order-last grid grid-cols-2 grow gap-x-2 lg:mt-3.5">
-                                        <div class="mb-3 text-center text-nano col-span-full font-medium uppercase text-[#7d859e]">
-                                            Вывод скинов
-                                        </div>
-                                        <button type="button" aria-haspopup="dialog" aria-expanded="false"
-                                                aria-controls="radix-:r1k:" data-state="closed"
-                                                class="btn btn--green mb-0.25 col-span-full relative h-13.5 w-full grow justify-center gap-3 rounded-lg pl-8 pr-3 text-tiny font-bold uppercase">
-                                            <div class="icon absolute left-4.5 w-5"
-                                                 style="mask-image: url(&quot;/svg/download.svg&quot;);"></div>
-                                            Вывести скины
-                                        </button>
+                <div class="relative z-30 contents lg:block">
+                    <section data-inventory=""
+                             class="flex h-full max-lg:h-[25rem] relative flex-col lg:flex-row bg-[#1c233a] lg:bg-[#1c233a] px-2.5 py-3.25 lg:min-h-0 lg:gap-5 rounded-3xl lg:p-5 [[data-inventory-sticky]_&amp;]:rounded-b-none transition-shadow [[data-inventory-sticky]:not([inert])_&amp;]:[box-shadow:0_-1rem_2rem_1rem_#161b2e] lg:h-[70rem]">
+                        <div class="relative contents w-full shrink-0 flex-wrap lg:flex lg:w-[16.875rem]">
+                            <h2 class="title mb-2 lg:mb-3 w-full flex items-center justify-between gap-2 pl-2 pr-11 lg:pr-0">
+                                Инвентарь</h2>
+                            <div class="grid grow gap-2 mb-auto mt-1 grid-cols-1">
+                                <div class="flex rounded border border-dashed border-[#2d3653] bg-[#232c48]/50 max-sm:text-sm px-3 sm:px-4 font-bold uppercase sm:gap-0.5 order-first text-[#a2feff] h-12.5 flex-row-reverse items-center justify-between">
+                                    0
+                                    <div class="text-nano font-medium text-[#a6adcd]">Выбрано скинов</div>
+                                </div>
+                                <div class="flex rounded border border-dashed border-[#2d3653] bg-[#232c48]/50 max-sm:text-sm px-3 sm:px-4 font-bold uppercase sm:gap-0.5 order-2 text-[#ffc6b0] h-13 flex-col justify-center pr-2 sm:h-15">
+                                    {{ user.siteuser.balance }}₽
+                                    <div class="text-nano font-medium text-[#a6adcd]">Баланс аккаунта</div>
+                                </div>
+                                <div class="flex rounded border border-dashed border-[#2d3653] bg-[#232c48]/50 max-sm:text-sm px-3 sm:px-4 font-bold uppercase sm:gap-0.5 text-[#a2feff] h-13 flex-col justify-center pr-2 sm:h-15">
+                                    0.00$
+                                    <div class="text-nano font-medium text-[#a6adcd]">Выбрано скинов в
+                                        инвентаре
                                     </div>
                                 </div>
-                                <div class="group relative -mx-2.5 flex grow flex-col overflow-hidden rounded-r lg:-my-5">
-                                    <ul class="grid grow grid-cols-3 place-content-start gap-1.5 overflow-y-auto px-2.5 py-2.5 [--scrollbar-mb:1.25rem] [--scrollbar-mt:1.25rem] sm:grid-fill-26 lg:grid-cols-6 lg:py-5">
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <button type="button"
-                                                        class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                    <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                         style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                                                    Купить скин
-                                                </button>
-                                                <button type="button" disabled="disabled"
-                                                        class="btn group relative overflow-hidden flex pt-3 pb-2 h-14 whitespace-nowrap rounded-b-inherit w-full flex-col items-center justify-center border-t border-[#272F48] leading-tight bg-[#232c48]/50 bg-gradient-var text-[.55rem] lg:text-nano font-medium uppercase outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] enabled:hover:text-[#BFCBE7] [--color:#BFCBE7] text-[#747E9D] opacity-30">
-                                                    <div>Быстрая покупка</div>
-                                                    <div class="font-bold text-tiny tiny:text-sm text-[--color]">1.00$
-                                                    </div>
-                                                </button>
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <button type="button"
-                                                        class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                    <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                         style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                                                    Купить скин
-                                                </button>
-                                                <button type="button" disabled="disabled"
-                                                        class="btn group relative overflow-hidden flex pt-3 pb-2 h-14 whitespace-nowrap rounded-b-inherit w-full flex-col items-center justify-center border-t border-[#272F48] leading-tight bg-[#232c48]/50 bg-gradient-var text-[.55rem] lg:text-nano font-medium uppercase outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] enabled:hover:text-[#BFCBE7] [--color:#BFCBE7] text-[#747E9D] opacity-30">
-                                                    <div>Быстрая покупка</div>
-                                                    <div class="font-bold text-tiny tiny:text-sm text-[--color]">5.00$
-                                                    </div>
-                                                </button>
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <button type="button"
-                                                        class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                    <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                         style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                                                    Купить скин
-                                                </button>
-                                                <button type="button" disabled="disabled"
-                                                        class="btn group relative overflow-hidden flex pt-3 pb-2 h-14 whitespace-nowrap rounded-b-inherit w-full flex-col items-center justify-center border-t border-[#272F48] leading-tight bg-[#232c48]/50 bg-gradient-var text-[.55rem] lg:text-nano font-medium uppercase outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] enabled:hover:text-[#BFCBE7] [--color:#BFCBE7] text-[#747E9D] opacity-30">
-                                                    <div>Быстрая покупка</div>
-                                                    <div class="font-bold text-tiny tiny:text-sm text-[--color]">
-                                                        10.00$
-                                                    </div>
-                                                </button>
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <button type="button"
-                                                        class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                    <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                         style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                                                    Купить скин
-                                                </button>
-                                                <button type="button" disabled="disabled"
-                                                        class="btn group relative overflow-hidden flex pt-3 pb-2 h-14 whitespace-nowrap rounded-b-inherit w-full flex-col items-center justify-center border-t border-[#272F48] leading-tight bg-[#232c48]/50 bg-gradient-var text-[.55rem] lg:text-nano font-medium uppercase outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] enabled:hover:text-[#BFCBE7] [--color:#BFCBE7] text-[#747E9D] opacity-30">
-                                                    <div>Быстрая покупка</div>
-                                                    <div class="font-bold text-tiny tiny:text-sm text-[--color]">0.25$
-                                                    </div>
-                                                </button>
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <button type="button"
-                                                        class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                    <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                         style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                                                    Купить скин
-                                                </button>
-                                                <button type="button" disabled="disabled"
-                                                        class="btn group relative overflow-hidden flex pt-3 pb-2 h-14 whitespace-nowrap rounded-b-inherit w-full flex-col items-center justify-center border-t border-[#272F48] leading-tight bg-[#232c48]/50 bg-gradient-var text-[.55rem] lg:text-nano font-medium uppercase outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] enabled:hover:text-[#BFCBE7] [--color:#BFCBE7] text-[#747E9D] opacity-30">
-                                                    <div>Быстрая покупка</div>
-                                                    <div class="font-bold text-tiny tiny:text-sm text-[--color]">1.00$
-                                                    </div>
-                                                </button>
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <button type="button"
-                                                        class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                    <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                         style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                                                    Купить скин
-                                                </button>
-                                                <button type="button" disabled="disabled"
-                                                        class="btn group relative overflow-hidden flex pt-3 pb-2 h-14 whitespace-nowrap rounded-b-inherit w-full flex-col items-center justify-center border-t border-[#272F48] leading-tight bg-[#232c48]/50 bg-gradient-var text-[.55rem] lg:text-nano font-medium uppercase outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] enabled:hover:text-[#BFCBE7] [--color:#BFCBE7] text-[#747E9D] opacity-30">
-                                                    <div>Быстрая покупка</div>
-                                                    <div class="font-bold text-tiny tiny:text-sm text-[--color]">5.00$
-                                                    </div>
-                                                </button>
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <button type="button"
-                                                        class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                    <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                         style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                                                    Купить скин
-                                                </button>
-                                                <button type="button" disabled="disabled"
-                                                        class="btn group relative overflow-hidden flex pt-3 pb-2 h-14 whitespace-nowrap rounded-b-inherit w-full flex-col items-center justify-center border-t border-[#272F48] leading-tight bg-[#232c48]/50 bg-gradient-var text-[.55rem] lg:text-nano font-medium uppercase outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] enabled:hover:text-[#BFCBE7] [--color:#BFCBE7] text-[#747E9D] opacity-30">
-                                                    <div>Быстрая покупка</div>
-                                                    <div class="font-bold text-tiny tiny:text-sm text-[--color]">
-                                                        10.00$
-                                                    </div>
-                                                </button>
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <button type="button"
-                                                        class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                    <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                         style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                                                    Купить скин
-                                                </button>
-                                                <button type="button" disabled="disabled"
-                                                        class="btn group relative overflow-hidden flex pt-3 pb-2 h-14 whitespace-nowrap rounded-b-inherit w-full flex-col items-center justify-center border-t border-[#272F48] leading-tight bg-[#232c48]/50 bg-gradient-var text-[.55rem] lg:text-nano font-medium uppercase outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] enabled:hover:text-[#BFCBE7] [--color:#BFCBE7] text-[#747E9D] opacity-30">
-                                                    <div>Быстрая покупка</div>
-                                                    <div class="font-bold text-tiny tiny:text-sm text-[--color]">0.00$
-                                                    </div>
-                                                </button>
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <button type="button"
-                                                        class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                    <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                         style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                                                    Купить скин
-                                                </button>
-                                                <button type="button" disabled="disabled"
-                                                        class="btn group relative overflow-hidden flex pt-3 pb-2 h-14 whitespace-nowrap rounded-b-inherit w-full flex-col items-center justify-center border-t border-[#272F48] leading-tight bg-[#232c48]/50 bg-gradient-var text-[.55rem] lg:text-nano font-medium uppercase outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] enabled:hover:text-[#BFCBE7] [--color:#BFCBE7] text-[#747E9D] opacity-30">
-                                                    <div>Быстрая покупка</div>
-                                                    <div class="font-bold text-tiny tiny:text-sm text-[--color]">0.00$
-                                                    </div>
-                                                </button>
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <button type="button"
-                                                        class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                    <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                         style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                                                    Купить скин
-                                                </button>
-                                                <button type="button" disabled="disabled"
-                                                        class="btn group relative overflow-hidden flex pt-3 pb-2 h-14 whitespace-nowrap rounded-b-inherit w-full flex-col items-center justify-center border-t border-[#272F48] leading-tight bg-[#232c48]/50 bg-gradient-var text-[.55rem] lg:text-nano font-medium uppercase outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] enabled:hover:text-[#BFCBE7] [--color:#BFCBE7] text-[#747E9D] opacity-30">
-                                                    <div>Быстрая покупка</div>
-                                                    <div class="font-bold text-tiny tiny:text-sm text-[--color]">0.00$
-                                                    </div>
-                                                </button>
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="drop-placehoder relative overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded">
-                                                <button type="button"
-                                                        class="btn group relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
-                                                    <div class="icon mb-1.5 lg:mb-2.5 w-6 lg:w-7"
-                                                         style="mask-image: url(&quot;/svg/add.svg&quot;);"></div>
-                                                    Купить скин
-                                                </button>
-                                                <button type="button" disabled="disabled"
-                                                        class="btn group relative overflow-hidden flex pt-3 pb-2 h-14 whitespace-nowrap rounded-b-inherit w-full flex-col items-center justify-center border-t border-[#272F48] leading-tight bg-[#232c48]/50 bg-gradient-var text-[.55rem] lg:text-nano font-medium uppercase outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] enabled:hover:text-[#BFCBE7] [--color:#BFCBE7] text-[#747E9D] opacity-30">
-                                                    <div>Быстрая покупка</div>
-                                                    <div class="font-bold text-tiny tiny:text-sm text-[--color]">0.00$
-                                                    </div>
-                                                </button>
-                                                <div class="absolute inset-0 rounded-inherit border border-[#272f48] pointer-events-none"></div>
-                                                <div class="absolute bottom-0 h-px w-1/2 left-1/2 -translate-x-1/2 bg-gradient-radial-var [--from:#3E4B74]"></div>
-                                                <div class="rounded-full aspect-square absolute w-10 bg-[#3E4B74] blur-[1rem] transform-gpu -bottom-7.5 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                                            </div>
-                                        </div>
-                                    </ul>
-                                    <div class="scroll-shadow scroll-shadow--gradient scroll-shadow--start scroll-shadow--ver scroll-shadow--gradient"
-                                         style="opacity: 0.1;"></div>
-                                    <div class="scroll-shadow scroll-shadow--gradient scroll-shadow--end scroll-shadow--ver scroll-shadow--gradient"
-                                         style="opacity: 0;"></div>
-                                </div>
-                            </section>
+                            </div>
+                            <div class="order-last grow gap-x-2 mt-3">
+                                <button type="button" aria-haspopup="dialog" aria-expanded="false"
+                                        aria-controls="radix-:r1k:" data-state="closed"
+                                        class="btn btn--green mb-0.25 col-span-full relative h-13.5 w-full grow justify-center gap-3 rounded-lg pl-8 pr-3 text-tiny font-bold uppercase">
+                                    <div class="icon absolute left-4.5 w-5"
+                                         style="mask-image: url(&quot;/svg/download.svg&quot;);"></div>
+                                    Вывести скины
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                        <div class="group relative -mx-2.5 flex grow flex-col overflow-hidden rounded-r lg:-my-5"
+                             style="max-height: 53em; overflow-y: auto;">
+                            <ul class="grid grow grid-cols-3 place-content-start gap-1.5 overflow-y-auto px-2.5 py-2.5 [--scrollbar-mb:1.25rem] [--scrollbar-mt:1.25rem] sm:grid-fill-26 lg:grid-cols-6 lg:grid-rows-2  lg:py-5">
+                                {% for skin in skins %}
+                                    <div>
+                                        <div class="drop-placehoder relative rounded overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded, bg-gradient-var pb-3 text-left text-[--color]"
+                                             data-item-color="{{ skin.rarity.index }}">
+                                            <button type="button"
+                                                    class="btn group  relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
+                                                <img src="{% static skin.path_to_icon %}"
+                                                 class="m-auto aspect-square object-contain w-[80%] sm:w-[80%]"
+                                                 width="175" height="175" alt=""/>
+                                            </button>
+                                            <div class="absolute inset-x-1.5 z-1 top-2.5 flex items-center justify-between lg:inset-x-2.5">
+                                                <div class="bg-color-mix-20 px-1.5 lg:px-2 h-5 lg:h-6 flex items-center justify-center rounded-sm uppercase text-[0.6rem] lg:text-nano font-bold">{{ skin.quality.name }}</div>
+                                                <div class="pr-0.5 sm:pr-1 md:pr-2 text-tiny tiny:text-sm font-bold ml-auto text-[#ffc6b0]">{{ skin.cost }}₽</div>
+                                            </div>
+                                            <div class="absolute inset-x-2.5 bottom-5 leading-tight lg:inset-x-4.5 lg:bottom-5">
+                                                <div class="text-white">
+                                                    {% if skin.is_statTrak %}StatTrak{% endif %}{{ skin.gun_name }}
+                                                </div>
+                                                <div>{{ skin.name }}</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                {% endfor %}
+                            </ul>
+                            <div class="scroll-shadow scroll-shadow--gradient scroll-shadow--start scroll-shadow--ver scroll-shadow--gradient"
+                                 style="opacity: 0.1;"></div>
+                            <div class="scroll-shadow scroll-shadow--gradient scroll-shadow--end scroll-shadow--ver scroll-shadow--gradient"
+                                 style="opacity: 0;"></div>
+                        </div>
+                    </section>
                 </div>
             </div>
-            <div data-state="closed" class="contents">
-                <div data-state="closed" id="radix-:r4:" hidden="" class="block w-[--chat-w] shrink-0 chat-wrapper"
-                     style=""></div>
-                <div data-state="closed" id="radix-:r4:" hidden=""
-                     class="chat-wrapper fixed right-[--removed-body-scroll-bar-size,0] inset-y-0 pb-5 z-[31] [body:has(#matches-coupon)_&amp;]:pb-[calc(var(--matches-coupon-h)+1.25rem)] flex w-[--chat-w] bg-[#1b2238] flex-col items-stretch rounded-tl-lg"
-                     style=""></div>
-            </div>
         </div>
-        <div aria-hidden="true"
-             class="fixed inset-0 z-20 cursor-auto bg-[#161b2e]/95 transition-all duration-75 invisible opacity-0 ease-out"></div>
     </div>
+    <div data-state="closed" class="contents">
+        <div data-state="closed" id="radix-:r4:" hidden="" class="block w-[--chat-w] shrink-0 chat-wrapper"
+             style=""></div>
+        <div data-state="closed" id="radix-:r4:" hidden=""
+             class="chat-wrapper fixed right-[--removed-body-scroll-bar-size,0] inset-y-0 pb-5 z-[31] [body:has(#matches-coupon)_&amp;]:pb-[calc(var(--matches-coupon-h)+1.25rem)] flex w-[--chat-w] bg-[#1b2238] flex-col items-stretch rounded-tl-lg"
+             style=""></div>
+    </div>
+</div>
+<div aria-hidden="true"
+     class="fixed inset-0 z-20 cursor-auto bg-[#161b2e]/95 transition-all duration-75 invisible opacity-0 ease-out"></div>
+</div>
 </div>
 </body>
 </html>
