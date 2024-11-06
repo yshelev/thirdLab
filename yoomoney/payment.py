@@ -26,7 +26,7 @@ def create_payment(data):
         'confirmation': {
             'type': 'redirect',
             'return_url':
-                f'https://f9eb-2a00-1fa3-840-3cad-f150-9a47-d0ba-ccd0.ngrok-free.app/accept_payment/'
+                f'{config["ngrok_url"]}/accept_payment/'
                 f'{change.id}',
         },
         'metadata': {
