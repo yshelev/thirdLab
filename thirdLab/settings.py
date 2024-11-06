@@ -9,7 +9,7 @@ SECRET_KEY = config["django_secret_key"]
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 STATICFILES_DIRS = [
