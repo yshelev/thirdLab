@@ -21,7 +21,7 @@ Creating a site similar to csgorun, with cases
 
 ## Authors
 
-- [Shelevoi Yaroslav](https://github.com/yshelev)
-- [Pirkov Vasiliy](https://github.com/eMD0gG)
+- [Shchelevoy Yaroslav](https://github.com/yshelev)
+- [Pyrkov Vasiliy](https://github.com/eMD0gG)
 - [Vongai Andrei](https://github.com/abbeswrld)
 
