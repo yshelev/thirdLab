@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'index-f608fb18.css' %}">
     <link rel="canonical" href="https://csgoad.run/cases" data-react-helmet="true">
     <title>TrashCases</title>
-     <link rel="icon" href="{% static 'icon.png' %}">
+    <link rel="icon" href="{% static 'icon.png' %}">
 
 
 </head>
@@ -59,12 +59,13 @@
 
                     {% else %}
                         <div class="ml-auto flex h-11 lg:h-12.5 items-center gap-1.5">
-                            <button type="button"
-                                    class="flex items-center gap-2 font-medium text-[#ffc6b0] lg:mr-2.25 lg:gap-3 sm:font-semibold"
-                                    translate="no">
-                                <div class="icon w-5.25" style="mask-image: url('../../static/svg/wallet.svg');"></div>
+                            <div class="flex flex-col font-medium text-[#ffc6b0] text-huge"
+                                 style="align-content: flex-start; align-items: flex-end;">
+                                <div>
+                                    {{ user.personaname }}
+                                </div>
                                 {{ user.siteuser.balance }}₽
-                            </button>
+                            </div>
                             <a class="block font-medium aspect-square h-fit shrink-0 ml-1 lg:ml-0 mr-0.5 w-8.5 lg:w-11.5"
                                href="/profile">
                                 <img alt="{{ user.personaname }}" src="{{ user.avatarmedium }}" width="46" height="46"
@@ -104,7 +105,8 @@
                         {% load static %}
                         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-fill-50 lg:flex flex-wrap justify-center">
                             {% for case in cases %}
-                                <a class="block rounded-3xl relative z-1 hover:z-2 aspect-[290/370] md:aspect-[290/350] lg:w-1/5 group" href='cases/{{ case.name }}'>
+                                <a class="block rounded-3xl relative z-1 hover:z-2 aspect-[290/370] md:aspect-[290/350] lg:w-1/5 group"
+                                   href='cases/{{ case.name }}'>
                                     <div class="mx-[-4%] pointer-events-none">
                                         <img src="{% static case.path_to_icon %}" width="200" height="200"
                                              alt="{{ case.name }}"
