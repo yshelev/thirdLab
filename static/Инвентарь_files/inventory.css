@@ -7,6 +7,10 @@
     font-display: block
 }
 
+.chosen_item {
+    opacity: 0.5;
+}
+
 .lg-icon {
     font-family: lg!important;
     speak: never;
