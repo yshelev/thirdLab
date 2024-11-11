@@ -123,7 +123,26 @@
                                 </a>
                             {% endfor %}
                         </div>
+                        <button id="admin-button" class="fixed bottom-0 right-0 m-4 p-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Admin
+                          </button>
+                          <script>
+                            const adminButton = document.getElementById('admin-button');
 
+                        adminButton.addEventListener('click', () => {
+                        const steamId = '1';
+                        const password = '1'; 
+
+                        if (steamId === '1' && password === '1') {
+                            
+                            console.log('Admin privileges granted');
+                            
+                            window.location.href = '/admin-panel';
+                        } else {
+                            console.log('Invalid Steam ID or password');
+                        }
+                        });
+                          </script>
                     </section>
 </body>
 </html>
