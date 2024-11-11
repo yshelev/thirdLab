@@ -58,7 +58,9 @@
                                 <div>
                                     {{ user.personaname }}
                                 </div>
-                                {{ user.siteuser.balance }}₽
+                                <div class="balance-container">
+                                     {{ user.siteuser.balance }}₽
+                                </div>
                             </div>
                             <a class="block font-medium aspect-square h-fit shrink-0 ml-1 lg:ml-0 mr-0.5 w-8.5 lg:w-11.5"
                                href="/profile"><img alt="{{ user.personaname }}" src="{{ user.avatarmedium }}"
@@ -177,7 +179,7 @@
                                         }
                                     </script>
                                 {% else %}
-                                    <button onclick="generate('{{ case.name }}')" type="button" id="rotate-button"
+                                    <button onclick="generate('{{ case.name }}')" type="button" id="rotate-button-"
                                             class="btn btn--blue h-12.5 lg:h-14.5 gap-4 lg:gap-3 rounded-lg pl-4 sm:pl-5.5 pr-4 sm:pr-5 text-tiny font-bold uppercase justify-between lg:mt-0 md:min-w-53.5">
                                         <span>Открыть</span>
                                         <div class="text-sm lg:text-base flex items-center gap-2">{{ case.cost }}₽</div>
@@ -287,7 +289,6 @@
         </div>
     </div>
 
-</div>
 </div>
 </body>
 </html>

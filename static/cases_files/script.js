@@ -12,7 +12,7 @@ function generate(name) {
     }
     const rouletteContainer = document.getElementById('roulette-container')
     const rotateButton = document.getElementById('rotate-button')
-    const balanceContainer = document.getElementById("balance-container")
+    const balanceContainer = document.querySelector(".balance-container")
     const items = rouletteContainer.children
 
     let isRotating = false
@@ -51,8 +51,7 @@ function generate(name) {
         }
     )
     balanceContainer.innerHTML = `
-        <div class="icon w-5.25" style="mask-image: url('../../static/svg/wallet.svg');"></div>
-        ${data["new_user_balance"] + "₽"}
+        ${data["new_user_balance"]}₽
     `
 
     if (isRotating) return

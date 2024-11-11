@@ -10,6 +10,23 @@
 
 </head>
 <body style="">
+<script>
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+    const csrf_token = getCookie('csrftoken');
+</script>
 <div id="root">
     <svg class="sr-only" aria-hidden="true">
         <defs>
@@ -66,7 +83,9 @@
                                     <div>
                                         {{ user.personaname }}
                                     </div>
-                                    {{ user.siteuser.balance }}₽
+                                    <div id="balance-container">
+                                        {{ user.siteuser.balance }}₽
+                                    </div>
                                 </div>
                                 <a class="block font-medium aspect-square h-fit shrink-0 ml-1 lg:ml-0 mr-0.5 w-8.5 lg:w-11.5"
                                    href="/profile">
@@ -136,7 +155,8 @@
                                     </div>
                                     Вывести скины
                                 </button>
-                                <button type="button"
+                                <script src="../../static/Инвентарь_files/sell_skins.js"></script>
+                                <button type="button" id="sold-out-button" onclick="on_sell_button_click()"
                                         class="btn btn--gold relative mt-auto order-last h-13.5 w-full shrink-0 gap-3.5 rounded-lg pl-6.5 pr-5 text-tiny font-bold uppercase lg:mt-3.5">
                                     Продать скины
                                 </button>
@@ -144,13 +164,19 @@
                         </div>
                         <div class="group relative -mx-2.5 flex grow flex-col overflow-hidden rounded-r lg:-my-5"
                              style="max-height: 53em; overflow-y: auto;">
-                            <ul class="grid grow grid-cols-3 place-content-start gap-1.5 overflow-y-auto px-2.5 py-2.5 [--scrollbar-mb:1.25rem] [--scrollbar-mt:1.25rem] sm:grid-fill-26 lg:grid-cols-6 lg:grid-rows-2  lg:py-5">
+                            <ul id="skin-list" class="grid grow grid-cols-3 place-content-start gap-1.5 overflow-y-auto px-2.5 py-2.5 [--scrollbar-mb:1.25rem] [--scrollbar-mt:1.25rem] sm:grid-fill-26 lg:grid-cols-6 lg:grid-rows-2  lg:py-5">
                                 <script src="../../static/Инвентарь_files/chose_skin.js"></script>
                                 {% for skin in skins %}
-                                    <div>
+                                    <div class="skin-container">
                                         <div onclick="on_skin_click(this, '{{ skin.cost }}')"
-                                             class="drop-placehoder relative rounded overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded, bg-gradient-var pb-3 text-left text-[--color]"
-                                             data-item-color="{{ skin.rarity.index }}">
+                                             class="data-container drop-placehoder relative rounded overflow-hidden aspect-[100/128] lg:[.inventory-mini-list_&amp;]:aspect-[140/154] flex flex-col rounded, bg-gradient-var pb-3 text-left text-[--color]"
+                                            data-skin-cost="{{ skin.cost }}"
+                                            data-quality-id="{{ skin.quality.id }}"
+                                            data-is-stattrak="{{ skin.is_statTrek }}"
+                                            data-is-souvenir="{{ skin.is_souvenir }}"
+                                            data-skin-name="{{ skin.name }}"
+                                            data-gun-name="{{ skin.gun_name }}"
+                                            data-item-color="{{ skin.rarity.index }}">
                                             <button type="button"
                                                     class="btn group  relative flex grow w-full flex-col items-center justify-center rounded-t-inherit bg-[#232c48]/50 bg-gradient-var text-nano font-medium uppercase text-[#747e9d] outline-none transition duration-75 [--from:#3e4b7414] [--to:transparent] hover:bg-[#212943] hover:text-[#b9c1d8]">
                                                 <img src="{% static skin.path_to_icon %}"

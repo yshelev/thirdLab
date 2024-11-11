@@ -1,14 +1,20 @@
+from json import JSONDecoder
+
 from django.contrib.auth import logout
 from django.http import HttpRequest
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from urllib3 import request
 
+from .serializers import SkinSerializer
 from .services import (
     get_cases_ordered_by_cost, get_case_by_name, get_skins_from_case_with_name_ordered_by_cost,
     get_list_of_random_skins_from_case_with_name, get_random_skin_from_case_with_name, serialize_skin,
-    check_if_user_can_open_case_with_name, update_user_after_buy_case_with_name, get_skins_from_user_with_id
+    check_if_user_can_open_case_with_name, update_user_after_buy_case_with_name, get_skins_from_user_with_id,
+    get_skin_by_attributes, get_skin_by_id
 )
 
 
@@ -50,3 +56,36 @@ def custom_logout(request):
     return redirect(next_page)
 
 
+@csrf_exempt
+def sell_skins(request: HttpRequest) -> HttpResponse:
+    try:
+        skins_to_sell = JSONDecoder().decode(request.body.decode())
+        print(skins_to_sell)
+        for skin_dict in skins_to_sell:
+            skin_name = skin_dict["skin_name"]
+            gun_name = skin_dict["gun_name"]
+            skin_quality = skin_dict["skin_quality"]
+            skin_souvenir = skin_dict["is_souvenir"]
+            skin_statTrack = skin_dict["is_statTrack"]
+            skin_cost = skin_dict["skin_cost"]
+            skin = get_skin_by_attributes(
+                skin_name,
+                gun_name,
+                skin_quality,
+                skin_souvenir,
+                skin_statTrack,
+                skin_cost
+            )
+            request.user.siteuser.items.remove(skin.id)
+            request.user.siteuser.balance += skin.cost
+
+            request.user.siteuser.save()
+    except Exception as e:
+        print(str(e))
+        return JsonResponse({"error": str(e)}, safe=False, status=400)
+    return JsonResponse(
+        {
+            "user_skins": [SkinSerializer(get_skin_by_id(skin_id)).data for skin_id in request.user.siteuser.items],
+            "user_balance": request.user.siteuser.balance
+        }
+    )

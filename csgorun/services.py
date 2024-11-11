@@ -79,3 +79,7 @@ def update_user_after_buy_case_with_name(user, case_name, win_skin):
 	user.siteuser.balance -= case_.cost
 	user.siteuser.items.append(win_skin)
 	user.siteuser.save()
+
+def get_skin_by_attributes(skin_name, gun_name, skin_quality, skin_souvenir, skin_statTrack, cost):
+
+	return Skin.objects.get(name=skin_name, gun_name=gun_name, quality_id=skin_quality, is_souvenir=skin_souvenir, is_statTrek=skin_statTrack, cost=cost)
